@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_vocabulary"
+            android:icon="@drawable/ic_vocabulary"
+            android:title="@string/action_vocabulary" />
+        <item
+            android:id="@+id/nav_grammar"
+            android:icon="@drawable/ic_grammar"
+            android:title="@string/action_grammar" />
+        <item
+            android:id="@+id/nav_basic_test"
+            android:icon="@drawable/ic_basic_test"
+            android:title="@string/action_basic_test" />
+        <item
+            android:id="@+id/nav_exam"
+            android:icon="@drawable/ic_exam"
+            android:title="@string/action_exam" />
+    </group>
+
+    <item android:title="@string/title_communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="@string/action_share" />
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_about"
+                android:title="@string/action_setting" />
+            <item
+                android:id="@+id/nav_rating"
+                android:icon="@drawable/ic_rating"
+                android:title="@string/action_rating" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about"
+                android:title="@string/action_about" />
+        </menu>
+    </item>
+</menu>

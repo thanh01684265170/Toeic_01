@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="material_orange_300">#FFBA5C</color>
+    <color name="material_brown_300">#B8977E</color>
+    <color name="material_blue_accent_400">#00A6FF</color>
+    <color name="material_red_accent_200">#F95F62</color>
+    <color name="material_white_100">#f9f6f6</color>
+    <color name="material_teal_400">#30abaa</color>
+    <color name="material_blue_grey_700">#2d5d82</color>
+    <color name="light_green_accent_700">#0cfd04</color>
+    <color name="red_accent_700">#fd0404</color>
+</resources>
