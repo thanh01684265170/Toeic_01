@@ -1,9 +1,11 @@
 package com.framgia.toeic.screen.vocabulary;
 
+import com.framgia.toeic.data.model.Vocabulary;
 import com.framgia.toeic.data.model.VocabularyLessonItem;
 import com.framgia.toeic.data.repository.VocabularyLessonRepository;
 import com.framgia.toeic.data.source.Callback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VocabularyPresenter implements VocabularyContract.Presenter {
@@ -34,6 +36,16 @@ public class VocabularyPresenter implements VocabularyContract.Presenter {
 
     @Override
     public void pushVocabularies() {
-        mView.showVocabularyDeatailActivity(mVocabularyLessonItems);
+        List<VocabularyLessonItem> vocabularyLessonItems = new ArrayList<>();
+        for (VocabularyLessonItem vocabularyLessonItem : mVocabularyLessonItems) {
+            if (vocabularyLessonItem.isSelected()) {
+                vocabularyLessonItems.add(vocabularyLessonItem);
+            }
+        }
+        if(vocabularyLessonItems.isEmpty()){
+            mView.showNotificationEmpty();
+            return;
+        }
+        mView.showVocabularyDeatailActivity(vocabularyLessonItems);
     }
 }

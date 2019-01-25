@@ -32,17 +32,22 @@
     <string name="title_very_good">Xuất sắc</string>
     <string name="title_good">Tốt</string>
     <string name="title_normal">Bình thường</string>
-    <string name="title_bad">Kém</string>
-    <string name="title_very_bad">Rất kém</string>
+    <string name="title_bad">Cần cố gắng hơn</string>
+    <string name="title_very_bad">Cần cố gắng hơn nữa</string>
     <string name="title_intro_1">KHÔNG CẦN MÁY TÍNH</string>
     <string name="title_intro_2">HỌC KHI ĂN</string>
     <string name="title_intro_3">HỌC KHI NGỦ</string>
-    <string name="des_intro_1">Với Toeic 600 bạn có thể học ở mọi nơi mọi chỗ mà không phải cần nhiều thứ hỗ trợ ngoài chiếc điện thoại thân yêu,</string>
-    <string name="des_intro_2">Nếu bạn là người ít thời gian thì với chức năng trắc nghiệm giúp bạn tiết kiệm rất nhiều thời gian,</string>
-    <string name="des_intro_3">Ngay cả khi lên giường với chức năng luyện nghe bạn cõ thể học ngay cả khi lường biếng nhất,</string>
+    <string name="des_intro_1">Với Toeic 600 bạn có thể học ở mọi nơi mọi chỗ mà không
+        phải cần nhiều thứ hỗ trợ ngoài chiếc điện thoại thân yêu,</string>
+    <string name="des_intro_2">Nếu bạn là người ít thời gian thì với chức năng trắc nghiệm
+        giúp bạn tiết kiệm rất nhiều thời gian,</string>
+    <string name="des_intro_3">Ngay cả khi lên giường với chức năng luyện nghe bạn
+        cõ thể học ngay cả khi lường biếng nhất,</string>
     <string name="button_intro_1">Tiếp</string>
     <string name="button_intro_2">Bắt Đầu</string>
     <string name="title_name_user">Tên của bạn</string>
     <string name="title_target_user">Mục tiêu:</string>
     <string name="title_score">600</string>
+    <string name="title_start">Start</string>
+    <string name="notification_empty">Chọn ít nhất 1 bài</string>
 </resources>

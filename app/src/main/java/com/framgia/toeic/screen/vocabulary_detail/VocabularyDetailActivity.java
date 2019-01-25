@@ -8,8 +8,11 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +36,7 @@ import java.util.Locale;
 
 public class VocabularyDetailActivity extends ResultTest
         implements VocabularyDetailContract.View, VocabularyDetailFragment.OnAnswerChangeListener,
-        ShowAnswerListener, View.OnClickListener, ViewPager.OnPageChangeListener {
+        ShowAnswerListener, View.OnClickListener {
     private static final String EXTRA_LIST_QUESTION = "EXTRA_LIST_QUESTION";
     private static final int ID_VOCABULARY = 1;
     private ViewPager mViewPager;
@@ -42,6 +45,7 @@ public class VocabularyDetailActivity extends ResultTest
     private ArrayList<Vocabulary> mVocabularies;
     private List<Fragment> mVocabularyFragments;
     private VocabularyDetailContract.Presenter mPresenter;
+    private Switch mSwitch;
 
     public static Intent getIntent(Context context, List<Vocabulary> vocabularies) {
         Intent intent = new Intent(context, VocabularyDetailActivity.class);
@@ -70,6 +74,7 @@ public class VocabularyDetailActivity extends ResultTest
                 MarkRepository.getInstance(new MarkLocalDataSource(
                         new MarkDatabaseHelper(new DBHelper(this)))));
         mHandler = new Handler();
+        mSwitch = findViewById(R.id.switch_auto_next);
         mCountTime = START_TIME;
     }
 
@@ -85,7 +90,7 @@ public class VocabularyDetailActivity extends ResultTest
             public void run() {
                 mHandler.postDelayed(this, TRANFER_SECOND_TO_MILISECOND);
                 mCountTime++;
-                mTextViewTime.setText(getStringDatefromlong(mCountTime));
+                mTextViewTime.setText(getStringDatefromlong(mCountTime*TRANFER_SECOND_TO_MILISECOND));
             }
         }, 0);
     }
@@ -96,10 +101,15 @@ public class VocabularyDetailActivity extends ResultTest
         if (index != -1) {
             mVocabularies.get(index).setSelected(vocabulary.isSelected());
         }
+        if (mSwitch.isChecked()) {
+            mViewPager.setCurrentItem(++index, true);
+        }
     }
 
     @Override
     public void notifyFragments() {
+        mSwitch.setChecked(false);
+        mSwitch.setVisibility(View.GONE);
         for (Fragment fragment : mVocabularyFragments) {
             DisplayAnswerListener displayAnswerListener = (DisplayAnswerListener) fragment;
             displayAnswerListener.showAnswer();
@@ -110,18 +120,33 @@ public class VocabularyDetailActivity extends ResultTest
     @Override
     public void showDialogResult(int mark, int rating) {
         super.showDialogResult(mark, rating);
-        mTextViewFalse.setText(mark+"");
+        mTextViewFalse.setText(mVocabularies.size() - mark + "");
         mTextViewTimeResult.setText(mTextViewTime.getText());
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.text_submit:
-                mPresenter.checkResult(ID_VOCABULARY,  mVocabularies);
+                mPresenter.checkResult(ID_VOCABULARY, mVocabularies);
                 mHandler.removeCallbacksAndMessages(null);
                 notifyFragments();
-                mViewPager.addOnPageChangeListener(this);
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int i, float v, int i1) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int i) {
+                        notifyFragments();
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int i) {
+
+                    }
+                });
                 break;
             case R.id.button_review:
                 mDialogResult.dismiss();
@@ -137,16 +162,4 @@ public class VocabularyDetailActivity extends ResultTest
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onPageScrolled(int i, float v, int i1) {
-        notifyFragments();
-    }
-
-    @Override
-    public void onPageSelected(int i) {
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int i) {
-    }
 }

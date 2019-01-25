@@ -21,7 +21,7 @@ public class VocabularyViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment =  VocabularyDetailFragment.newInstance(mVocabularies.get(i), i);
+        Fragment fragment =  VocabularyDetailFragment.newInstance(mVocabularies.get(i), i, mVocabularies.size());
         mFragments.add(fragment);
         return fragment;
     }

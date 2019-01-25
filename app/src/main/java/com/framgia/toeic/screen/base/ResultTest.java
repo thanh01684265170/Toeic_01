@@ -9,10 +9,7 @@ import android.widget.TextView;
 
 import com.framgia.toeic.R;
 
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static com.framgia.toeic.screen.base.RatingResult.BAD;
 import static com.framgia.toeic.screen.base.RatingResult.GOOD;
@@ -21,7 +18,7 @@ import static com.framgia.toeic.screen.base.RatingResult.VERY_BAD;
 import static com.framgia.toeic.screen.base.RatingResult.VERY_GOOD;
 
 public abstract class ResultTest extends BaseActivity implements View.OnClickListener {
-    private static final String FORMAT_TIME = "mm:ss";
+    private static final String FORMAT_TIME = "%2d:%2d";
     public static final int TRANFER_SECOND_TO_MILISECOND = 1000;
     public static final int START_TIME = 0;
     protected Dialog mDialogResult;
@@ -65,9 +62,22 @@ public abstract class ResultTest extends BaseActivity implements View.OnClickLis
         }
     }
 
-    protected String getStringDatefromlong(int countTime) {
-        Date date = new Date(countTime * TRANFER_SECOND_TO_MILISECOND);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_TIME, Locale.getDefault());
-        return simpleDateFormat.format(date);
+    protected String getStringDatefromlong(long countTime) {
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(countTime);
+        long second = TimeUnit.MILLISECONDS.toSeconds(countTime) -
+                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(countTime));
+        return (minutes < 10 ? "0" : "") + minutes +":"+(second < 10 ? "0" : "") + second;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_review:
+                mDialogResult.dismiss();
+                break;
+            case R.id.button_continue:
+                finish();
+                break;
+        }
     }
 }
