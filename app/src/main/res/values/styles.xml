@@ -28,4 +28,9 @@
         <item name="colorControlActivated">@color/material_orange_300</item>
     </style>
 
+    <style name="MyCheckBox" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#ffffff</item>   <!-- normal border color change as you wish -->
+        <item name="colorControlActivated">#ffffff</item> <!-- activated color change as you wish -->
+    </style>
+
 </resources>
