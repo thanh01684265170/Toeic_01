@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +18,18 @@ import java.util.List;
 public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdapter.Viewholder> {
     private List<GrammarLesson> mLessons;
     private OnItemClickListener mListener;
+    private int[] data;
+//
+//    public GrammarLessonAdapter(List<GrammarLesson> lessons, OnItemClickListener listener) {
+//        mLessons = lessons;
+//        mListener = listener;
+//    }
 
-    public GrammarLessonAdapter(List<GrammarLesson> lessons, OnItemClickListener listener) {
+
+    public GrammarLessonAdapter(List<GrammarLesson> lessons, OnItemClickListener listener, int[] data) {
         mLessons = lessons;
         mListener = listener;
+        this.data = data;
     }
 
     @NonNull
@@ -28,7 +37,7 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
     public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_grammar, viewGroup, false);
-        return new Viewholder(view, mListener);
+        return new Viewholder(view, mListener,data);
     }
 
     @Override
@@ -47,13 +56,15 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
         private CardView mCardView;
         private GrammarLesson mGrammarLesson;
         private OnItemClickListener mListener;
+        private int[] mImages;
 
-        public Viewholder(View itemView, OnItemClickListener listener) {
+        public Viewholder(View itemView, OnItemClickListener listener, int[] data) {
             super(itemView);
             mListener = listener;
             mImageView = itemView.findViewById(R.id.image_grammar);
             mTextTitle = itemView.findViewById(R.id.text_name_grammar);
             mCardView = itemView.findViewById(R.id.cardview_grammar);
+            mImages = data;
             mCardView.setOnClickListener(this);
         }
 
@@ -62,6 +73,7 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
                 return;
             }
             mGrammarLesson = grammarLesson;
+            mImageView.setImageResource(mImages[grammarLesson.getId()-1]);
             mTextTitle.setText(grammarLesson.getName());
         }
 

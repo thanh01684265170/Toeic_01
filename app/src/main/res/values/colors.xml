@@ -12,4 +12,10 @@
     <color name="material_blue_grey_700">#2d5d82</color>
     <color name="light_green_accent_700">#0cfd04</color>
     <color name="red_accent_700">#fd0404</color>
+    <color name="trasparent">#1effffff</color>
+    <color name="material_teal_300">#43C6AC</color>
+    <color name="text_hint">#abffffff</color>
+    <color name="material_cyan_500">#01bcd4</color>
+    <color name="material_brown_600">#6e3159</color>
+    <color name="material_red_400">#ef5555</color>
 </resources>
