@@ -46,7 +46,8 @@ public class VocabularyActivity extends BaseActivity implements View.OnClickList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.action_vocabulary));
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#43C6AC")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
+                (R.color.material_cyan_300)));
         findViewById(R.id.fab_next).setOnClickListener(this);
         mRecyclerView = findViewById(R.id.recycler_vocabulary_lesson);
     }

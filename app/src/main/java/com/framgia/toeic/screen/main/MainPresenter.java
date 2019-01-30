@@ -1,7 +1,5 @@
 package com.framgia.toeic.screen.main;
 
-import android.util.Log;
-
 import com.framgia.toeic.data.model.Mark;
 import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.repository.VocabularyLessonRepository;
@@ -14,6 +12,7 @@ public class MainPresenter implements MainContract.Presenter {
     private MarkRepository mMarkRepository;
     private VocabularyLessonRepository mVocabularyLessonRepository;
     private MainContract.View mView;
+
     public MainPresenter(MarkRepository repository,
                          VocabularyLessonRepository vocabularyLessonRepository,
                          MainContract.View view) {
@@ -27,7 +26,6 @@ public class MainPresenter implements MainContract.Presenter {
         mMarkRepository.getMarks(new Callback<List<Mark>>() {
             @Override
             public void onGetDataSuccess(List<Mark> marks) {
-                mView.showValueProgressBar(marks);
             }
 
             @Override
@@ -51,8 +49,6 @@ public class MainPresenter implements MainContract.Presenter {
                 mView.showError(error);
             }
         });
-
-        mView.setMaxSizeProgressBars(numberQuestions);
     }
 
 

@@ -42,4 +42,7 @@
     <string name="des_intro_3">Ngay cả khi lên giường với chức năng luyện nghe bạn cõ thể học ngay cả khi lường biếng nhất,</string>
     <string name="button_intro_1">Tiếp</string>
     <string name="button_intro_2">Bắt Đầu</string>
+    <string name="title_name_user">Tên của bạn</string>
+    <string name="title_target_user">Mục tiêu:</string>
+    <string name="title_score">600</string>
 </resources>

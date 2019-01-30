@@ -18,4 +18,11 @@
     <color name="material_cyan_500">#01bcd4</color>
     <color name="material_brown_600">#6e3159</color>
     <color name="material_red_400">#ef5555</color>
+    <color name="material_grey_200">#ededed</color>
+    <color name="marterial_deep_purple_200">#e8e6fa</color>
+    <color name="marterial_indigo_400">#7266ba</color>
+    <color name="marterial_indigo_500">#3f009e</color>
+    <color name="material_cyan_300">#47e3c2</color>
+    <color name="white">#ffffff</color>
+    <color name="tranperant_white">#e1dfdf</color>
 </resources>

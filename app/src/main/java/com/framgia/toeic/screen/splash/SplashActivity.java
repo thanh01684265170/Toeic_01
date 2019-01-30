@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.framgia.toeic.R;
@@ -18,11 +21,16 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
         FragmentAdapter.onNext {
     private static final int TIME = 3000;
     private static final String TEXT_BUTTON = "Tiếp";
+    private static final int SIZE_DOT = 35;
+    private static final int TOTAL_DOT = 3;
+    private static final String CODE_DOT = "&#8226";
     private SplashContract.Presenter mPresenter;
     private ViewPager mViewPager;
     private FragmentAdapter mAdapter;
     private Handler mHandler;
     private int mPageCurrent;
+    private LinearLayout mDotLayout;
+    private TextView[] mDot;
 
     Runnable mRunnable = new Runnable() {
         @Override
@@ -40,6 +48,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addDots(0);
     }
 
     @Override
@@ -64,12 +73,27 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
     @Override
     protected void initComponent() {
         mViewPager = findViewById(R.id.viewpager);
+        mDotLayout = findViewById(R.id.linear_dot);
         mAdapter = new FragmentAdapter(this);
         mViewPager.setAdapter(mAdapter);
         mHandler = new Handler();
         mPresenter = new SplashPresenter(this, FileRepository.getInstance(
                 new FileRepository(new FileRemoteDatasource())));
+    }
 
+    public void addDots(int position) {
+        mDotLayout.removeAllViews();
+        mDot = new TextView[TOTAL_DOT];
+        for (int i = 0; i < mDot.length; i++) {
+            mDot[i] = new TextView(this);
+            mDot[i].setText(Html.fromHtml(CODE_DOT));
+            mDot[i].setTextSize(SIZE_DOT);
+            mDot[i].setTextColor(getResources().getColor(R.color.tranperant_white));
+            mDotLayout.addView(mDot[i]);
+        }
+        if (mDot.length > 0) {
+            mDot[position].setTextColor(getResources().getColor(R.color.white));
+        }
     }
 
     @Override
@@ -82,6 +106,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
 
             @Override
             public void onPageSelected(int position) {
+                addDots(position);
                 mPageCurrent = position;
             }
 

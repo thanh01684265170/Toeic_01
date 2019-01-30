@@ -14,5 +14,6 @@ public interface SplashContract {
         void getLinkAudioFiles();
 
         void getLinkImageFiles();
+
     }
 }
