@@ -111,6 +111,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
             public void onPageSelected(int position) {
                 addDots(position);
                 mPageCurrent = position;
+                mHandler.removeCallbacks(mRunnable);
+                mHandler.postDelayed(mRunnable, TIME);
             }
 
             @Override
@@ -150,7 +152,5 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
             startActivity(MainActivity.getMainIntent(SplashActivity.this));
         }
         mViewPager.setCurrentItem(i + 1, true);
-        mHandler.removeCallbacks(mRunnable);
-        mHandler.postDelayed(mRunnable, TIME);
     }
 }
