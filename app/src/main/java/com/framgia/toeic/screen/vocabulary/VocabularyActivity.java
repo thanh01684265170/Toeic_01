@@ -57,6 +57,11 @@ public class VocabularyActivity extends BaseActivity implements View.OnClickList
         mPresenter = new VocabularyPresenter(this,
                 VocabularyLessonRepository.getInstance(new VocabularyLessonLocalDataSource(
                         new VocabularyLessonDatabaseHelper(new DBHelper(this)))));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mPresenter.getVocabularies();
     }
 
@@ -86,9 +91,7 @@ public class VocabularyActivity extends BaseActivity implements View.OnClickList
     public void showVocabularyDeatailActivity(List<VocabularyLessonItem> vocabularyLessonItems) {
         List<Vocabulary> vocabularies = new ArrayList<>();
         for (VocabularyLessonItem vocabularyLessonItem : vocabularyLessonItems) {
-            if (vocabularyLessonItem.isSelected()) {
-                vocabularies.addAll(vocabularyLessonItem.getVocabularies());
-            }
+            vocabularies.addAll(vocabularyLessonItem.getVocabularies());
         }
         Collections.shuffle(vocabularies);
         startActivity(VocabularyDetailActivity.getIntent(this, vocabularies));
@@ -97,5 +100,10 @@ public class VocabularyActivity extends BaseActivity implements View.OnClickList
     @Override
     public void showError(Exception e) {
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showNotificationEmpty() {
+        Toast.makeText(this, getResources().getString(R.string.notification_empty), Toast.LENGTH_SHORT).show();
     }
 }

@@ -10,7 +10,6 @@ public class VocabularyLesson extends Lesson {
     public VocabularyLesson() {
     }
 
-
     public VocabularyLesson(int id, String name) {
         super(id, name);
     }

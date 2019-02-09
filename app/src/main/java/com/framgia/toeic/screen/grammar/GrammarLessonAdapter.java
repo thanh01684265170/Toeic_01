@@ -1,12 +1,12 @@
 package com.framgia.toeic.screen.grammar;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,17 +16,13 @@ import com.framgia.toeic.data.model.GrammarLesson;
 import java.util.List;
 
 public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdapter.Viewholder> {
+    private Context mContext;
     private List<GrammarLesson> mLessons;
     private OnItemClickListener mListener;
     private int[] data;
-//
-//    public GrammarLessonAdapter(List<GrammarLesson> lessons, OnItemClickListener listener) {
-//        mLessons = lessons;
-//        mListener = listener;
-//    }
 
-
-    public GrammarLessonAdapter(List<GrammarLesson> lessons, OnItemClickListener listener, int[] data) {
+    public GrammarLessonAdapter(Context context, List<GrammarLesson> lessons, OnItemClickListener listener, int[] data) {
+        mContext = context;
         mLessons = lessons;
         mListener = listener;
         this.data = data;
@@ -37,12 +33,12 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
     public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_grammar, viewGroup, false);
-        return new Viewholder(view, mListener,data);
+        return new Viewholder(view, mListener, data);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder viewholder, int i) {
-        viewholder.bindData(mLessons.get(i));
+        viewholder.bindData(mLessons.get(i), mContext);
     }
 
     @Override
@@ -68,12 +64,11 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
             mCardView.setOnClickListener(this);
         }
 
-        public void bindData(GrammarLesson grammarLesson) {
+        public void bindData(GrammarLesson grammarLesson, Context context) {
             if (grammarLesson == null) {
                 return;
             }
             mGrammarLesson = grammarLesson;
-            mImageView.setImageResource(mImages[grammarLesson.getId()-1]);
             mTextTitle.setText(grammarLesson.getName());
         }
 

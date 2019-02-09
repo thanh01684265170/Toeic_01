@@ -11,6 +11,8 @@ public interface VocabularyContract {
         void showVocabularyDeatailActivity(List<VocabularyLessonItem> vocabularyLessonItems);
 
         void showError(Exception e);
+
+        void showNotificationEmpty();
     }
 
     interface Presenter {
