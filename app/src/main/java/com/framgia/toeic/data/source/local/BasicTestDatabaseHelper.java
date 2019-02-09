@@ -2,6 +2,7 @@ package com.framgia.toeic.data.source.local;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.framgia.toeic.data.BasicTestDatasource;
 import com.framgia.toeic.data.model.BasicTest;
@@ -71,6 +72,7 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
                 null, COLUMN_UNIT_BASIC_TEST + "=?",
                 new String[]{basicTestLesson.getId() + ""},
                 null, null, null, null);
+        Log.d("ducanh123", "getBasicTests: " + basicTestLesson.getId());
         cursorExam.moveToFirst();
         do {
             BasicTest basicTest = new BasicTest.Builder()

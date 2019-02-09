@@ -17,7 +17,6 @@ import com.framgia.toeic.data.model.GrammarLesson;
 import java.util.List;
 
 public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdapter.Viewholder> {
-    private Context mContext;
     private List<GrammarLesson> mLessons;
     private OnItemClickListener mListener;
 
@@ -36,7 +35,7 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder viewholder, int i) {
-        viewholder.bindData(mLessons.get(i), mContext);
+        viewholder.bindData(mLessons.get(i));
     }
 
     @Override
@@ -62,7 +61,7 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
             mCardView.setOnClickListener(this);
         }
 
-        public void bindData(GrammarLesson grammarLesson, Context context) {
+        public void bindData(GrammarLesson grammarLesson) {
             if (grammarLesson == null) {
                 return;
             }

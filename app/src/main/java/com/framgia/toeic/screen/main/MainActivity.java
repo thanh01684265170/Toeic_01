@@ -159,6 +159,7 @@ public class MainActivity extends BaseActivity
                 break;
 
             case R.id.card_basic_test:
+                startActivity(BasicTestActivity.getIntent(this));
                 break;
 
             case R.id.card_exam:

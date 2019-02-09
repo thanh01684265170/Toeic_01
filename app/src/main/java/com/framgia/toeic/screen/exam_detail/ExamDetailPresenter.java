@@ -1,6 +1,7 @@
 package com.framgia.toeic.screen.exam_detail;
 
 import com.framgia.toeic.data.model.Exam;
+import com.framgia.toeic.screen.base.MediaPlayerInstance;
 import com.framgia.toeic.screen.base.RatingCaculator;
 import com.framgia.toeic.screen.base.RatingResult;
 

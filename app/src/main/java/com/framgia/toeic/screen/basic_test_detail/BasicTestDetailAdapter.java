@@ -80,7 +80,7 @@ public class BasicTestDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 break;
             case VIEW_2:
                 ExamAdapter.ViewHolderType3 viewHolderType3 = (ExamAdapter.ViewHolderType3) viewHolder;
-                viewHolderType3.bindData(mBasicTests.get(i), isChecked);
+                viewHolderType3.bindData(mBasicTests.get(i), isChecked, mContext, EXTENSION_PNG);
                 break;
         }
     }

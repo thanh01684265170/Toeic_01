@@ -86,7 +86,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             case VIEW_2:
                 ViewHolderType3 viewHolderType3 = (ViewHolderType3) viewHolder;
-                viewHolderType3.bindData(mExams.get(i), isChecked);
+                viewHolderType3.bindData(mExams.get(i), isChecked, mContext, EXTENSION_JPG);
                 break;
         }
     }
@@ -162,39 +162,42 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void showAnswer(Exam exam) {
-            mRadioButtonA.setTextColor(Color.BLACK);
-            mRadioButtonB.setTextColor(Color.BLACK);
-            mRadioButtonC.setTextColor(Color.BLACK);
+            mRadioButtonA.setTextColor(Color.WHITE);
+            mRadioButtonB.setTextColor(Color.WHITE);
+            mRadioButtonC.setTextColor(Color.WHITE);
             mRadioButtonA.setClickable(false);
             mRadioButtonB.setClickable(false);
             mRadioButtonC.setClickable(false);
-            if (exam.getResult().equals(exam.getAnwserA()) && !exam.isCheckAnswerA()) {
-                mRadioButtonA.setTextColor(Color.RED);
-                return;
-            }
-
-            if (exam.getResult().equals(exam.getAnwserB()) && !exam.isCheckAnswerB()) {
-                mRadioButtonB.setTextColor(Color.RED);
-                return;
-            }
-
-            if (exam.getResult().equals(exam.getAnwserC()) && !exam.isCheckAnswerC()) {
-                mRadioButtonC.setTextColor(Color.RED);
-                return;
-            }
-
-            if (exam.getResult().equals(exam.getAnwserA()) && exam.isCheckAnswerA()) {
+            checkAnswer(exam);
+            if (exam.getResult().equals(exam.getAnwserA())) {
                 mRadioButtonA.setTextColor(Color.BLUE);
                 return;
             }
 
-            if (exam.getResult().equals(exam.getAnwserB()) && exam.isCheckAnswerB()) {
+            if (exam.getResult().equals(exam.getAnwserB())) {
                 mRadioButtonB.setTextColor(Color.BLUE);
                 return;
             }
 
-            if (exam.getResult().equals(exam.getAnwserC()) && exam.isCheckAnswerC()) {
+            if (exam.getResult().equals(exam.getAnwserC())) {
                 mRadioButtonC.setTextColor(Color.BLUE);
+                return;
+            }
+        }
+
+        public void checkAnswer(Exam exam) {
+            if (!exam.getResult().equals(exam.getAnwserA()) && exam.isCheckAnswerA()) {
+                mRadioButtonA.setTextColor(Color.RED);
+                return;
+            }
+
+            if (!exam.getResult().equals(exam.getAnwserB()) && exam.isCheckAnswerB()) {
+                mRadioButtonB.setTextColor(Color.RED);
+                return;
+            }
+
+            if (!exam.getResult().equals(exam.getAnwserC()) && exam.isCheckAnswerC()) {
+                mRadioButtonC.setTextColor(Color.RED);
                 return;
             }
         }
@@ -222,18 +225,21 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void showAnswer(Exam exam) {
             super.showAnswer(exam);
-            mRadioButtonD.setTextColor(Color.BLACK);
+            mRadioButtonD.setTextColor(Color.WHITE);
             if (exam.getResult().equals(exam.getAnwserD()) && !exam.isCheckAnswerD()) {
-                mRadioButtonD.setTextColor(Color.RED);
-                return;
-            }
-
-            if (exam.getResult().equals(exam.getAnwserC()) && exam.isCheckAnswerD()) {
                 mRadioButtonD.setTextColor(Color.BLUE);
                 return;
             }
-
             mRadioButtonD.setClickable(false);
+        }
+
+        @Override
+        public void checkAnswer(Exam exam) {
+            super.checkAnswer(exam);
+            if (!exam.getResult().equals(exam.getAnwserD()) && exam.isCheckAnswerC()) {
+                mRadioButtonD.setTextColor(Color.RED);
+                return;
+            }
         }
     }
 
@@ -245,34 +251,43 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static class ViewHolderType3 extends ViewHolderExam {
         private RadioButton mRadioButtonD;
+        private ImageView mImageViewQuestion;
 
         public ViewHolderType3(@NonNull View itemView) {
             super(itemView);
             mRadioButtonD = itemView.findViewById(R.id.radio_d);
+            mImageViewQuestion = itemView.findViewById(R.id.image_question);
         }
 
-        @Override
-        public void bindData(final Exam exam, boolean checked) {
+        public void bindData(final Exam exam, boolean checked, Context context, String extensionImage) {
             super.bindData(exam, checked);
             mRadioButtonD.setText(exam.getAnwserD());
             mRadioButtonD.setChecked(exam.isCheckAnswerD());
+            ContextWrapper cw = new ContextWrapper(context);
+            File directory = cw.getDir(FOLDER_IMAGE, Context.MODE_PRIVATE);
+            File mypath = new File(directory, exam.getIdImage() + extensionImage);
+            Glide.with(context).load(mypath).into(mImageViewQuestion);
+            mRadioButtonD.setText(exam.getAnwserD());
         }
-
 
         @Override
         public void showAnswer(Exam exam) {
             super.showAnswer(exam);
-            mRadioButtonD.setTextColor(Color.BLACK);
+            mRadioButtonD.setTextColor(Color.WHITE);
             if (exam.getResult().equals(exam.getAnwserD()) && !exam.isCheckAnswerD()) {
-                mRadioButtonD.setTextColor(Color.RED);
-                return;
-            }
-
-            if (exam.getResult().equals(exam.getAnwserC()) && exam.isCheckAnswerD()) {
                 mRadioButtonD.setTextColor(Color.BLUE);
                 return;
             }
             mRadioButtonD.setClickable(false);
+        }
+
+        @Override
+        public void checkAnswer(Exam exam) {
+            super.checkAnswer(exam);
+            if (!exam.getResult().equals(exam.getAnwserD()) && exam.isCheckAnswerC()) {
+                mRadioButtonD.setTextColor(Color.RED);
+                return;
+            }
         }
     }
 }

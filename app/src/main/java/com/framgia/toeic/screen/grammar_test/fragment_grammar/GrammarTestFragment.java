@@ -20,14 +20,17 @@ public class GrammarTestFragment extends QuestionFragment
         implements GrammarTestContract.View, DisplayAnswerListener, RadioGroup.OnCheckedChangeListener {
     static final String ARGUMENT_QUESTION = "ARGUMENT_QUESTION";
     static final String ARGUMENT_NUMBER_QUESTION = "ARGUMENT_NUMBER_QUESTION";
+    static final String ARGUMENT_TOTAL_NUMBER_QUESTION = "ARGUMENT_TOTAL_NUMBER_QUESTION";
     private Grammar mGrammar;
+    private int mNumberQuestion;
     private GrammarTestContract.Presenter mPresenter;
     private OnAnswerChangeListener mCallback;
 
-    public static Fragment newInstance(Grammar grammar, int numberQuestion) {
+    public static Fragment newInstance(Grammar grammar, int numberQuestion, int grammarSize) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARGUMENT_QUESTION, grammar);
         bundle.putInt(ARGUMENT_NUMBER_QUESTION, numberQuestion);
+        bundle.putInt(ARGUMENT_TOTAL_NUMBER_QUESTION, grammarSize);
         Fragment fragment = new GrammarTestFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -50,13 +53,14 @@ public class GrammarTestFragment extends QuestionFragment
     public void initData() {
         mGrammar = getArguments().getParcelable(ARGUMENT_QUESTION);
         mCurrentQuestionPosition = getArguments().getInt(ARGUMENT_NUMBER_QUESTION);
+        mNumberQuestion = getArguments().getInt(ARGUMENT_TOTAL_NUMBER_QUESTION);
         mPresenter = new GrammarTestPresenter(this, mGrammar.getResult());
     }
 
     @Override
     public void showData() {
         int question = mCurrentQuestionPosition + 1;
-        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question) + "/");
+        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question) + "/" + mNumberQuestion);
         mTextViewContentQuestion.setText(mGrammar.getQuestion());
         mRadioAnswerA.setText(mGrammar.getAnwserA());
         mRadioAnswerB.setText(mGrammar.getAnwserB());
