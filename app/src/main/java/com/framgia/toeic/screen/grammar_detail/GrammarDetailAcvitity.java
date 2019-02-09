@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.grammar_detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +38,8 @@ public class GrammarDetailAcvitity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
+                (R.color.material_cyan_300)));
         mPDFView = findViewById(R.id.pdf_grammar);
 
     }

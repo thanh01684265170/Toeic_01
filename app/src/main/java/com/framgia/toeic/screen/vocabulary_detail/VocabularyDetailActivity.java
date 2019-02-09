@@ -1,6 +1,5 @@
 package com.framgia.toeic.screen.vocabulary_detail;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +7,8 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +24,8 @@ import com.framgia.toeic.screen.base.ResultTest;
 import com.framgia.toeic.screen.base.ShowAnswerListener;
 import com.framgia.toeic.screen.vocabulary_detail.fragment_vocabulary.VocabularyDetailFragment;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class VocabularyDetailActivity extends ResultTest
         implements VocabularyDetailContract.View, VocabularyDetailFragment.OnAnswerChangeListener,
@@ -45,7 +38,6 @@ public class VocabularyDetailActivity extends ResultTest
     private ArrayList<Vocabulary> mVocabularies;
     private List<Fragment> mVocabularyFragments;
     private VocabularyDetailContract.Presenter mPresenter;
-    private Switch mSwitch;
 
     public static Intent getIntent(Context context, List<Vocabulary> vocabularies) {
         Intent intent = new Intent(context, VocabularyDetailActivity.class);
@@ -74,7 +66,6 @@ public class VocabularyDetailActivity extends ResultTest
                 MarkRepository.getInstance(new MarkLocalDataSource(
                         new MarkDatabaseHelper(new DBHelper(this)))));
         mHandler = new Handler();
-        mSwitch = findViewById(R.id.switch_auto_next);
         mCountTime = START_TIME;
     }
 
@@ -90,7 +81,7 @@ public class VocabularyDetailActivity extends ResultTest
             public void run() {
                 mHandler.postDelayed(this, TRANFER_SECOND_TO_MILISECOND);
                 mCountTime++;
-                mTextViewTime.setText(getStringDatefromlong(mCountTime*TRANFER_SECOND_TO_MILISECOND));
+                mTextViewTime.setText(getStringDatefromlong(mCountTime * TRANFER_SECOND_TO_MILISECOND));
             }
         }, 0);
     }
@@ -101,15 +92,10 @@ public class VocabularyDetailActivity extends ResultTest
         if (index != -1) {
             mVocabularies.get(index).setSelected(vocabulary.isSelected());
         }
-        if (mSwitch.isChecked()) {
-            mViewPager.setCurrentItem(++index, true);
-        }
     }
 
     @Override
     public void notifyFragments() {
-        mSwitch.setChecked(false);
-        mSwitch.setVisibility(View.GONE);
         for (Fragment fragment : mVocabularyFragments) {
             DisplayAnswerListener displayAnswerListener = (DisplayAnswerListener) fragment;
             displayAnswerListener.showAnswer();

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_grammar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/dp_10"
-    android:layout_margin="@dimen/dp_5"
-    app:cardBackgroundColor="@color/trasparent">
+    app:cardBackgroundColor="@color/trasparent"
+    app:cardCornerRadius="@dimen/dp_5">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,14 +32,12 @@
             android:id="@+id/text_name_grammar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="61dp"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:textColor="@color/material_cyan_300"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_grammar"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,12 +45,13 @@
             android:id="@+id/ratingBar3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_40"
             android:isIndicator="true"
             android:numStars="5"
             android:scaleX="0.5"
             android:scaleY="0.5"
+            android:theme="@style/RatingBar1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_grammar"
             app:layout_constraintStart_toStartOf="parent"
