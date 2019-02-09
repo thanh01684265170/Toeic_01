@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.grammar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +25,6 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
     private GrammarLessonAdapter mLessonAdapter;
     private GrammarContract.Presenter mPresenter;
     private RecyclerView mRecyclerView;
-    private int[] data;
 
     public static Intent getGrammarIntent(Context context) {
         return new Intent(context, GrammarActivity.class);
@@ -45,6 +45,8 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.action_grammar));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
+                (R.color.material_cyan_300)));
         mRecyclerView = findViewById(R.id.recycle_lesson_grammar);
     }
 
@@ -60,10 +62,6 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
 
     @Override
     protected void initData() {
-        data = new int[]{R.drawable.grammar_1, R.drawable.grammar_2, R.drawable.grammar_3,
-                R.drawable.grammar_4, R.drawable.grammar_5, R.drawable.grammar_6,
-                R.drawable.grammar_7, R.drawable.grammar_8, R.drawable.grammar_9,
-                R.drawable.grammar_10, R.drawable.grammar_11};
         mPresenter = new GrammarPresenter(this, GrammarLessonRepository.getInstance(
                 new GrammarLessonLocalDataSource(new GrammarLessonDatabaseHelper(new DBHelper(this)))));
         mPresenter.getGrammarLessons();
@@ -71,7 +69,7 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
 
     @Override
     public void showGrammars(List<GrammarLesson> grammarLessons) {
-        mLessonAdapter = new GrammarLessonAdapter(this, grammarLessons, this, data);
+        mLessonAdapter = new GrammarLessonAdapter(grammarLessons, this);
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mLessonAdapter);
