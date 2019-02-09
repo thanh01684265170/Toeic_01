@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.exam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +46,8 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.action_grammar));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
+                (R.color.material_cyan_300)));
         mRecyclerView = findViewById(R.id.recycler_exam);
     }
 
