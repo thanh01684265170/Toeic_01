@@ -1,7 +1,6 @@
 package com.framgia.toeic.screen.vocabulary_detail.fragment_vocabulary;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,29 +8,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.Vocabulary;
-import com.framgia.toeic.screen.base.BaseFragment;
 import com.framgia.toeic.screen.base.DisplayAnswerListener;
 import com.framgia.toeic.screen.base.QuestionFragment;
 
 public class VocabularyDetailFragment extends QuestionFragment
-        implements RadioGroup.OnCheckedChangeListener, VocabularyDetailContract.View, DisplayAnswerListener, Runnable {
-    static final String ARGUMENT_QUESTION = "ARGUMENT_QUESTION";
-    static final String ARGUMENT_NUMBER_QUESTION = "ARGUMENT_NUMBER_QUESTION";
+        implements RadioGroup.OnCheckedChangeListener, VocabularyDetailContract.View,
+        DisplayAnswerListener, Runnable {
+    private static final String ARGUMENT_QUESTION = "ARGUMENT_QUESTION";
+    private static final String ARGUMENT_NUMBER_QUESTION = "ARGUMENT_NUMBER_QUESTION";
+    private static final String ARGUMENT_TOTAL_NUMBER_QUESTION = "ARGUMENT_TOTAL_NUMBER_QUESTION";
     private VocabularyDetailContract.Presenter mPresenter;
     private Vocabulary mVocabulary;
     private int mCurrentQuestionPosition;
+    private int mTotalNumberQuestion;
     private OnAnswerChangeListener mCallback;
 
-    public static Fragment newInstance(Vocabulary vocabulary, int numberQuestion) {
+    public static Fragment newInstance(Vocabulary vocabulary, int numberQuestion, int totalNumberQuestion) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARGUMENT_QUESTION, vocabulary);
         bundle.putInt(ARGUMENT_NUMBER_QUESTION, numberQuestion);
+        bundle.putInt(ARGUMENT_TOTAL_NUMBER_QUESTION, totalNumberQuestion);
         Fragment fragment = new VocabularyDetailFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -54,13 +54,14 @@ public class VocabularyDetailFragment extends QuestionFragment
     public void initData() {
         mVocabulary = getArguments().getParcelable(ARGUMENT_QUESTION);
         mCurrentQuestionPosition = getArguments().getInt(ARGUMENT_NUMBER_QUESTION);
+        mTotalNumberQuestion = getArguments().getInt(ARGUMENT_TOTAL_NUMBER_QUESTION);
         mPresenter = new VocabularyDetailPresenter(this, mVocabulary.getResult());
     }
 
     @Override
     public void showData() {
         int question = mCurrentQuestionPosition + 1;
-        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question));
+        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question)+"/"+ mTotalNumberQuestion);
         StringBuilder builder = new StringBuilder();
         builder.append(mVocabulary.getQuestion()).append(getString(R.string.title_vocabulary_question));
         mTextViewContentQuestion.setText(builder.toString());
@@ -114,24 +115,26 @@ public class VocabularyDetailFragment extends QuestionFragment
 
     @Override
     public void onAnswerARight() {
-        mRadioAnswerA.setBackgroundColor(Color.RED);
+        mRadioAnswerA.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override
     public void onAnswerBRight() {
-        mRadioAnswerB.setBackgroundColor(Color.RED);
+        mRadioAnswerB.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override
     public void onAnswerCRight() {
-        mRadioAnswerC.setBackgroundColor(Color.RED);
+        mRadioAnswerC.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override
     public void showAnswer() {
-        mPresenter.displayAnwserA(mRadioAnswerA.getText().toString());
-        mPresenter.displayAnwserB(mRadioAnswerB.getText().toString());
-        mPresenter.displayAnwserC(mRadioAnswerC.getText().toString());
+       if (!mVocabulary.isSelected()){
+           mPresenter.displayAnwserA(mRadioAnswerA.getText().toString());
+           mPresenter.displayAnwserB(mRadioAnswerB.getText().toString());
+           mPresenter.displayAnwserC(mRadioAnswerC.getText().toString());
+       }
     }
 
     @Override

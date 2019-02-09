@@ -71,7 +71,7 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
 
     @Override
     public void showGrammars(List<GrammarLesson> grammarLessons) {
-        mLessonAdapter = new GrammarLessonAdapter(grammarLessons, this,data);
+        mLessonAdapter = new GrammarLessonAdapter(this, grammarLessons, this, data);
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mLessonAdapter);

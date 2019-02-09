@@ -79,7 +79,7 @@ public class GrammarTestActivity extends ResultTest implements ShowAnswerListene
             public void run() {
                 mCountTime++;
                 mHandler.postDelayed(this, TRANFER_SECOND_TO_MILISECOND);
-                mTextViewTime.setText(getStringDatefromlong(mCountTime));
+                mTextViewTime.setText(getStringDatefromlong(mCountTime*TRANFER_SECOND_TO_MILISECOND));
             }
         }, 0);
     }
@@ -144,5 +144,11 @@ public class GrammarTestActivity extends ResultTest implements ShowAnswerListene
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

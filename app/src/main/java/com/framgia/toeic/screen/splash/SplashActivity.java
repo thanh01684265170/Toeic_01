@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.framgia.toeic.R;
@@ -14,11 +15,12 @@ import com.framgia.toeic.data.repository.FileRepository;
 import com.framgia.toeic.data.source.remote.FileRemoteDatasource;
 import com.framgia.toeic.screen.base.BaseActivity;
 import com.framgia.toeic.screen.main.MainActivity;
+import com.google.firebase.FirebaseApp;
 
 import java.util.List;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View, OnWriteData,
-        FragmentAdapter.onNext {
+        FragmentAdapter.onNext, View.OnClickListener {
     private static final int TIME = 3000;
     private static final String TEXT_BUTTON = "Tiếp";
     private static final int SIZE_DOT = 35;
@@ -49,6 +51,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addDots(0);
+        FirebaseApp.initializeApp(this);
     }
 
     @Override
@@ -112,9 +115,13 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     @Override

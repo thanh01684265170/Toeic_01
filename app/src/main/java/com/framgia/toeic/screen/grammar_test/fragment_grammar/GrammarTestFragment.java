@@ -56,7 +56,7 @@ public class GrammarTestFragment extends QuestionFragment
     @Override
     public void showData() {
         int question = mCurrentQuestionPosition + 1;
-        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question));
+        mTextViewNumberQuestion.setText(getResources().getString(R.string.title_question) + (question) + "/");
         mTextViewContentQuestion.setText(mGrammar.getQuestion());
         mRadioAnswerA.setText(mGrammar.getAnwserA());
         mRadioAnswerB.setText(mGrammar.getAnwserB());
