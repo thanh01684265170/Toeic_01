@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.basic_test.BasicTestActivity">
+    tools:context=".screen.basic_test.BasicTestActivity"
+    android:background="@drawable/gradient_vocabulary">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_basic_test"

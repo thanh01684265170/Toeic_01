@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.basic_test;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,11 @@ public class BasicTestActivity extends BaseActivity
 
     @Override
     protected void initComponent() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.action_basic_test));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
+                (R.color.material_cyan_300)));
         mRecyclerView = findViewById(R.id.recycle_basic_test);
         mPresenter = new BasicTestPresenter(this,
                 BasicTestRepository.getInstance(
