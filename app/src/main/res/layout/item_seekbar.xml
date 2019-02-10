@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <SeekBar
-        android:id="@+id/seek_bar_listening"
+        android:id="@+id/seekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_8"

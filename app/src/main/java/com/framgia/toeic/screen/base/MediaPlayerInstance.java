@@ -1,4 +1,4 @@
-package com.framgia.toeic.screen.exam_detail;
+package com.framgia.toeic.screen.base;
 
 import android.media.MediaPlayer;
 

@@ -22,7 +22,7 @@ public class GrammarViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = GrammarTestFragment.newInstance(mGrammars.get(i), i);
+        Fragment fragment = GrammarTestFragment.newInstance(mGrammars.get(i), i, mGrammars.size());
         mFragments.add(fragment);
         return fragment;
     }

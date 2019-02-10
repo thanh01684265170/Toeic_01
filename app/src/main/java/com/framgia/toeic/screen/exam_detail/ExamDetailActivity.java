@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.ExamLesson;
+import com.framgia.toeic.screen.base.MediaPlayerInstance;
 import com.framgia.toeic.screen.base.ResultTest;
 
 import java.io.File;
@@ -22,19 +23,15 @@ import java.io.IOException;
 
 public class ExamDetailActivity extends ResultTest
         implements ExamDetailContract.View {
-    private static final String EXTRA_EXAM_LESSON = "EXTRA_EXAM_LESSON";
-    private static final int TRANFER_MINIUTE_TO_SECOND = 60;
     private static final int TIMELINE = 120;
+    private static final String EXTRA_EXAM_LESSON = "EXTRA_EXAM_LESSON";
     private static final String EXTENSION_MEDIA = ".m4a";
-    private static final String FORLDER_MEDIA = "audio";
     private ExamLesson mLesson;
     private RecyclerView mRecyclerView;
     private TextView mTextViewSubmit;
     private TextView mTextViewTime;
     private ExamDetailContract.Presenter mPresenter;
-    private SeekBar mSeekBar;
     private ImageView mImagePlayPause;
-    private CountDownTimer mCountDownTimer;
     private ExamAdapter mAdapter;
     public static Intent getIntent(Context context, ExamLesson examLesson) {
         Intent intent = new Intent(context, ExamDetailActivity.class);
@@ -49,13 +46,12 @@ public class ExamDetailActivity extends ResultTest
 
     @Override
     protected void initComponent() {
+        super.initComponent();
         mRecyclerView = findViewById(R.id.recycler_exam_detail);
         mTextViewSubmit = findViewById(R.id.text_submit);
         mTextViewTime = findViewById(R.id.text_timer_exam);
         mPresenter = new ExamDetailPresenter(this);
-        mSeekBar = findViewById(R.id.seek_bar_listening);
         mImagePlayPause = findViewById(R.id.image_play_pause);
-        mHandler = new Handler(getMainLooper());
         mCountDownTimer = new CountDownTimer(
                 TIMELINE * TRANFER_MINIUTE_TO_SECOND * TRANFER_SECOND_TO_MILISECOND,
                 TRANFER_SECOND_TO_MILISECOND) {
@@ -73,6 +69,7 @@ public class ExamDetailActivity extends ResultTest
 
     @Override
     protected void initData() {
+        super.initData();
         mLesson = getIntent().getExtras().getParcelable(EXTRA_EXAM_LESSON);
         mAdapter = new ExamAdapter(this, mLesson.getExams(), false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,
@@ -80,48 +77,7 @@ public class ExamDetailActivity extends ResultTest
         mRecyclerView.setAdapter(mAdapter);
         mTextViewSubmit.setOnClickListener(this);
         mImagePlayPause.setOnClickListener(this);
-        playMedia();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSeekBar.setProgress(MediaPlayerInstance.getInstance().getCurrentPosition());
-                mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                        MediaPlayerInstance.getInstance().pause();
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                        MediaPlayerInstance.getInstance().seekTo(seekBar.getProgress());
-                        MediaPlayerInstance.getInstance().start();
-                    }
-                });
-                mHandler.postDelayed(this, TRANFER_SECOND_TO_MILISECOND);
-            }
-        }, 0);
-        mCountDownTimer.start();
-    }
-
-    public void playMedia() {
-        ContextWrapper cw = new ContextWrapper(this);
-        File directory = cw.getDir( FORLDER_MEDIA +
-                "", Context.MODE_PRIVATE);
-        File mypath = new File(directory, mLesson.getId() + EXTENSION_MEDIA);
-        try {
-            MediaPlayerInstance.getInstance().setAudioStreamType(AudioManager.STREAM_MUSIC);
-            MediaPlayerInstance.getInstance().reset();
-            MediaPlayerInstance.getInstance().setDataSource(mypath.getPath());
-            MediaPlayerInstance.getInstance().prepare();
-            MediaPlayerInstance.getInstance().start();
-            mSeekBar.setMax(MediaPlayerInstance.getInstance().getDuration());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        playMedia(mLesson.getId(), EXTENSION_MEDIA);
     }
 
     @Override
@@ -129,12 +85,7 @@ public class ExamDetailActivity extends ResultTest
         super.onClick(v);
         switch (v.getId()) {
             case R.id.text_submit:
-                mPresenter.checkAnswer(mLesson.getExams());
-                mCountDownTimer.cancel();
-                MediaPlayerInstance.getInstance().stop();
-                mSeekBar.setEnabled(false);
-                mAdapter.setChecked(true);
-                mAdapter.notifyDataSetChanged();
+                submitAnswer();
                 break;
             case R.id.image_play_pause:
                 mPresenter.checkListening();
@@ -164,5 +115,14 @@ public class ExamDetailActivity extends ResultTest
         super.onDestroy();
         MediaPlayerInstance.getInstance().stop();
         mCountDownTimer.cancel();
+    }
+
+    public void submitAnswer(){
+        mPresenter.checkAnswer(mLesson.getExams());
+        mCountDownTimer.cancel();
+        MediaPlayerInstance.getInstance().stop();
+        mSeekBar.setEnabled(false);
+        mAdapter.setChecked(true);
+        mAdapter.notifyDataSetChanged();
     }
 }

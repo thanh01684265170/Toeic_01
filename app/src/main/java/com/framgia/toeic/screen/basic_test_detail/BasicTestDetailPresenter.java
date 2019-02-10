@@ -2,9 +2,9 @@ package com.framgia.toeic.screen.basic_test_detail;
 
 import com.framgia.toeic.data.model.BasicTest;
 import com.framgia.toeic.data.model.BasicTestLesson;
-import com.framgia.toeic.data.model.Exam;
 import com.framgia.toeic.data.repository.BasicTestRepository;
 import com.framgia.toeic.data.source.Callback;
+import com.framgia.toeic.screen.base.MediaPlayerInstance;
 import com.framgia.toeic.screen.base.RatingCaculator;
 import com.framgia.toeic.screen.base.RatingResult;
 
@@ -65,6 +65,10 @@ public class BasicTestDetailPresenter extends RatingCaculator implements BasicTe
 
     @Override
     public void checkListening() {
-
+        if (MediaPlayerInstance.getInstance().isPlaying()) {
+            mView.pauseMedia();
+            return;
+        }
+        mView.listenMedia();
     }
 }
