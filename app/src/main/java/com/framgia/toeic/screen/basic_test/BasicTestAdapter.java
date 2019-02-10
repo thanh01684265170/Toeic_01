@@ -26,7 +26,7 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
     @NonNull
     @Override
     public BasicTestViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_grammar, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_basic_test, viewGroup, false);
         return new BasicTestViewHolder(view, mListener);
     }
 
@@ -50,9 +50,9 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
         public BasicTestViewHolder(View itemView, BasicTestAdapter.OnItemClickListener listener) {
             super(itemView);
             mListener = listener;
-            mImageView = itemView.findViewById(R.id.image_grammar);
-            mTextTitle = itemView.findViewById(R.id.text_name_grammar);
-            mCardView = itemView.findViewById(R.id.cardview_grammar);
+            mImageView = itemView.findViewById(R.id.image_basic);
+            mTextTitle = itemView.findViewById(R.id.text_name_basic);
+            mCardView = itemView.findViewById(R.id.cardview_basic);
             mCardView.setOnClickListener(this);
         }
 

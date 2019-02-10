@@ -27,7 +27,7 @@ public class ExamLessonAdapter extends RecyclerView.Adapter<ExamLessonAdapter.Vi
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_grammar, viewGroup, false);
+                .inflate(R.layout.item_exam, viewGroup, false);
         return new Viewholder(view, mListener);
     }
 
@@ -51,9 +51,9 @@ public class ExamLessonAdapter extends RecyclerView.Adapter<ExamLessonAdapter.Vi
         public Viewholder(View itemView, OnItemClickListener listener) {
             super(itemView);
             mListener = listener;
-            mImageView = itemView.findViewById(R.id.image_grammar);
-            mTextTitle = itemView.findViewById(R.id.text_name_grammar);
-            mCardView = itemView.findViewById(R.id.cardview_grammar);
+            mImageView = itemView.findViewById(R.id.image_exam);
+            mTextTitle = itemView.findViewById(R.id.text_name_exam);
+            mCardView = itemView.findViewById(R.id.cardview_exam);
             mCardView.setOnClickListener(this);
         }
 
