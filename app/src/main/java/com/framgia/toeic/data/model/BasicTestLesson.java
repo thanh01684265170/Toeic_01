@@ -8,8 +8,8 @@ import java.util.List;
 public class BasicTestLesson extends Lesson implements Parcelable {
     private List<BasicTest> mBasicTests;
 
-    public BasicTestLesson(int id, String name) {
-        super(id, name);
+    public BasicTestLesson(int id, String name, int rating) {
+        super(id, name, rating);
     }
 
     public BasicTestLesson(Parcel in, List<BasicTest> basicTests) {

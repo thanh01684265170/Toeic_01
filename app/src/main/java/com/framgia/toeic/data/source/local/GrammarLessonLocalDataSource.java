@@ -23,4 +23,9 @@ public class GrammarLessonLocalDataSource implements GrammarLessonDataSource.Loc
     public void getGrammars(GrammarLesson grammarLesson, Callback<List<Grammar>> callback) {
         mDatabaseHelper.getGrammars(grammarLesson, callback);
     }
+
+    @Override
+    public void updateLesson(GrammarLesson lesson, int mark, Callback<GrammarLesson> callback) {
+        mDatabaseHelper.updateLesson(lesson, mark, callback);
+    }
 }

@@ -6,16 +6,20 @@ import com.framgia.toeic.data.model.BasicTestLesson;
 import java.util.List;
 
 public interface BasicTestDetailContract {
-    interface View{
-        void showBasicTest(List<BasicTest> basicTests);
+    interface View {
         void showDialogResult(int mark, int rating);
+
         void listenMedia();
+
         void pauseMedia();
     }
 
-    interface Presenter{
-        void getBasicTest(BasicTestLesson basicTestLesson);
+    interface Presenter {
         void checkAnswer(List<BasicTest> basicTests);
+
         void checkListening();
+
+        void updateLesson(BasicTestLesson lesson, int mark);
+
     }
 }

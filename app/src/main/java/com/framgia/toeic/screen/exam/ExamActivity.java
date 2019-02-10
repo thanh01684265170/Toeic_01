@@ -52,6 +52,12 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.getExams();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -65,7 +71,6 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
     protected void initData() {
         mPresenter = new ExamPresenter(this, ExamLessonRepository.getInstance(
                 new ExamLessonLocalDataSource(new ExamLessonDatabaseHelper(new DBHelper(this)))));
-        mPresenter.getExams();
     }
 
     @Override

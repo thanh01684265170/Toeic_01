@@ -1,5 +1,6 @@
 package com.framgia.toeic.data.source.local;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -26,6 +27,7 @@ public class GrammarLessonDatabaseHelper implements GrammarLessonDataSource.Loca
     private static final String COLUMN_ANSWER_C = "answer_c";
     private static final String COLUMN_ANSWER_D = "answer_d";
     private static final String COLUMN_UNIT = "unit";
+    private static final String COLUMN_MAX_MARK = "max_mark";
     private DBHelper mDBHelper;
 
     public GrammarLessonDatabaseHelper(DBHelper DBHelper) {
@@ -43,14 +45,14 @@ public class GrammarLessonDatabaseHelper implements GrammarLessonDataSource.Loca
         List<GrammarLesson> grammarLessons = new ArrayList<>();
         SQLiteDatabase database = mDBHelper.getReadableDatabase();
         Cursor cursorLesson = database.query(TABLE_LESSON_GRAMMAR,
-                new String[]{COLUMN_ID_LESSON, COLUMN_NAME},
-                null, null, null, null, null);
+                null,null, null, null, null, null);
         cursorLesson.moveToFirst();
         do {
             GrammarLesson grammarLesson;
             grammarLesson = new GrammarLesson(cursorLesson.getInt(
                     cursorLesson.getColumnIndex(COLUMN_ID_LESSON)),
-                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)));
+                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)),
+                    cursorLesson.getInt(cursorLesson.getColumnIndex(COLUMN_MAX_MARK)));
             grammarLessons.add(grammarLesson);
         } while (cursorLesson.moveToNext());
         callback.onGetDataSuccess(grammarLessons);
@@ -88,5 +90,20 @@ public class GrammarLessonDatabaseHelper implements GrammarLessonDataSource.Loca
         } while (cursorGrammar.moveToNext());
         callback.onGetDataSuccess(grammars);
         mDBHelper.close();
+    }
+
+    @Override
+    public void updateLesson(GrammarLesson lesson, int mark, Callback<GrammarLesson> callback) {
+        try {
+            mDBHelper.openDatabase();
+        } catch (IOException e) {
+            callback.onGetDataFail(e);
+            return;
+        }
+        SQLiteDatabase db = mDBHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MAX_MARK, mark);
+        db.update(TABLE_LESSON_GRAMMAR, contentValues, COLUMN_ID_LESSON + "=?",
+                new String[]{lesson.getId() + ""});
     }
 }

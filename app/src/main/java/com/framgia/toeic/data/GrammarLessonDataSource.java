@@ -11,6 +11,9 @@ public interface GrammarLessonDataSource {
         void getGrammarLessons(Callback<List<GrammarLesson>> callback);
 
         void getGrammars(GrammarLesson grammarLesson, Callback<List<Grammar>> callback);
+
+        void updateLesson(GrammarLesson lesson, int mark, Callback<GrammarLesson> callback);
+
     }
 
     interface Remote {

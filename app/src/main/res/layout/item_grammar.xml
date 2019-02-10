@@ -30,19 +30,22 @@
 
         <TextView
             android:id="@+id/text_name_grammar"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:textColor="@color/material_cyan_300"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_grammar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RatingBar
-            android:id="@+id/ratingBar3"
+            android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_40"

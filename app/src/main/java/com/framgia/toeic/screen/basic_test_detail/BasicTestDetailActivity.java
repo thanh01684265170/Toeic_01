@@ -80,11 +80,13 @@ public class BasicTestDetailActivity extends ResultTest implements BasicTestDeta
     protected void initData() {
         super.initData();
         mLesson = getIntent().getParcelableExtra(EXTRA_BASIC_TEST_LESSON);
-        mPresenter.getBasicTest(mLesson);
+        mAdapter = new BasicTestDetailAdapter(this, mLesson.getBasicTests(), false);
+        mRecyclerBasicTest.setAdapter(mAdapter);
         mTextViewSubmit.setOnClickListener(this);
         mImagePlayPause.setOnClickListener(this);
         playMedia(mLesson.getId(), EXTENSION_MEDIA);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -96,13 +98,6 @@ public class BasicTestDetailActivity extends ResultTest implements BasicTestDeta
             case R.id.image_play_pause:
                 mPresenter.checkListening();
         }
-    }
-
-    @Override
-    public void showBasicTest(List<BasicTest> basicTests) {
-        mLesson.setBasicTests(basicTests);
-        mAdapter = new BasicTestDetailAdapter(this, basicTests, false);
-        mRecyclerBasicTest.setAdapter(mAdapter);
     }
 
     @Override
@@ -121,6 +116,7 @@ public class BasicTestDetailActivity extends ResultTest implements BasicTestDeta
     public void showDialogResult(int mark, int rating) {
         super.showDialogResult(mark, rating);
         mTextViewFalse.setText(mLesson.getBasicTests().size() - mark + "");
+        mPresenter.updateLesson(mLesson, mark);
     }
 
     @Override

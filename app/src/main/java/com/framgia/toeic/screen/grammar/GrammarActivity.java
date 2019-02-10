@@ -64,6 +64,11 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
     protected void initData() {
         mPresenter = new GrammarPresenter(this, GrammarLessonRepository.getInstance(
                 new GrammarLessonLocalDataSource(new GrammarLessonDatabaseHelper(new DBHelper(this)))));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mPresenter.getGrammarLessons();
     }
 

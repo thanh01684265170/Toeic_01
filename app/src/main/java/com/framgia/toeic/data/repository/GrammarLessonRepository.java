@@ -31,4 +31,9 @@ public class GrammarLessonRepository implements GrammarLessonDataSource.Local {
     public void getGrammars(GrammarLesson grammarLesson, Callback<List<Grammar>> callback) {
         mLocal.getGrammars(grammarLesson, callback);
     }
+
+    @Override
+    public void updateLesson(GrammarLesson lesson, int mark, Callback<GrammarLesson> callback) {
+        mLocal.updateLesson(lesson, mark, callback);
+    }
 }

@@ -1,5 +1,7 @@
 package com.framgia.toeic.screen.exam;
 
+import android.util.Log;
+
 import com.framgia.toeic.data.model.Exam;
 import com.framgia.toeic.data.model.ExamLesson;
 import com.framgia.toeic.data.repository.ExamLessonRepository;

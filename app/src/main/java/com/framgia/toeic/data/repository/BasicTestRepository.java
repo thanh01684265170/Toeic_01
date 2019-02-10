@@ -30,4 +30,9 @@ public class BasicTestRepository implements BasicTestDatasource.Local {
     public void getBasicTests(BasicTestLesson basicTestLesson, Callback<List<BasicTest>> callback) {
         mLocal.getBasicTests(basicTestLesson, callback);
     }
+
+    @Override
+    public void updateBasicTestLesson(BasicTestLesson lesson, int mark, Callback<BasicTestLesson> callback) {
+        mLocal.updateBasicTestLesson(lesson, mark, callback);
+    }
 }

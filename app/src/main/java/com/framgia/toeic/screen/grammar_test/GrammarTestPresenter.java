@@ -1,7 +1,9 @@
 package com.framgia.toeic.screen.grammar_test;
 
 import com.framgia.toeic.data.model.Grammar;
+import com.framgia.toeic.data.model.GrammarLesson;
 import com.framgia.toeic.data.model.Mark;
+import com.framgia.toeic.data.repository.GrammarLessonRepository;
 import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.Callback;
 import com.framgia.toeic.screen.base.RatingCaculator;
@@ -10,9 +12,9 @@ import java.util.List;
 
 public class GrammarTestPresenter extends RatingCaculator implements GrammarTestContract.Presenter {
     private GrammarTestContract.View mView;
-    private MarkRepository mRepository;
+    private GrammarLessonRepository mRepository;
 
-    public GrammarTestPresenter(GrammarTestContract.View view, MarkRepository repository) {
+    public GrammarTestPresenter(GrammarTestContract.View view, GrammarLessonRepository repository) {
         mView = view;
         mRepository = repository;
     }
@@ -31,18 +33,20 @@ public class GrammarTestPresenter extends RatingCaculator implements GrammarTest
     public void checkResult(final int id, List<Grammar> grammars) {
         final int score = caculateScore(grammars);
         final int rating = rating(score, grammars.size());
-        mRepository.getMark(id, new Callback<Mark>() {
+        mView.showDialogResult(score, rating);
+    }
+
+    @Override
+    public void updateLesson(GrammarLesson lesson, int mark) {
+        mRepository.updateLesson(lesson, mark, new Callback<GrammarLesson>() {
             @Override
-            public void onGetDataSuccess(Mark mark) {
-                if (score > mark.getMark()) {
-                    mRepository.updateMark(id, score);
-                }
-                mView.showDialogResult(score, rating);
+            public void onGetDataSuccess(GrammarLesson lesson) {
+
             }
 
             @Override
             public void onGetDataFail(Exception error) {
-                mView.showError(error);
+
             }
         });
     }

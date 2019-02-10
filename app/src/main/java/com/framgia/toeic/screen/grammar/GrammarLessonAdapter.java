@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.GrammarLesson;
+import com.framgia.toeic.screen.base.RatingCaculator;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
             mImageView = itemView.findViewById(R.id.image_grammar);
             mTextTitle = itemView.findViewById(R.id.text_name_grammar);
             mCardView = itemView.findViewById(R.id.cardview_grammar);
-            mRatingBar = itemView.findViewById(R.id.ratingBar3);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
             mCardView.setOnClickListener(this);
         }
 
@@ -66,7 +67,9 @@ public class GrammarLessonAdapter extends RecyclerView.Adapter<GrammarLessonAdap
                 return;
             }
             mGrammarLesson = grammarLesson;
-            mRatingBar.setRating(4);
+            RatingCaculator ratingCaculator = new RatingCaculator();
+            mRatingBar.setRating(ratingCaculator.rating(grammarLesson.getRating(),
+                    mGrammarLesson.getGrammars().size()));
             mTextTitle.setText(grammarLesson.getName());
         }
 

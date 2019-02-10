@@ -53,6 +53,12 @@ public class BasicTestActivity extends BaseActivity
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mPresenter.getBasicTestLessons();
     }
 

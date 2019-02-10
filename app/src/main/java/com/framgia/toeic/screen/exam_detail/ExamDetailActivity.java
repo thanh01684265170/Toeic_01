@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.ExamLesson;
+import com.framgia.toeic.data.repository.ExamLessonRepository;
+import com.framgia.toeic.data.source.local.DBHelper;
+import com.framgia.toeic.data.source.local.ExamLessonDatabaseHelper;
+import com.framgia.toeic.data.source.local.ExamLessonLocalDataSource;
 import com.framgia.toeic.screen.base.MediaPlayerInstance;
 import com.framgia.toeic.screen.base.ResultTest;
 
@@ -50,7 +54,9 @@ public class ExamDetailActivity extends ResultTest
         mRecyclerView = findViewById(R.id.recycler_exam_detail);
         mTextViewSubmit = findViewById(R.id.text_submit);
         mTextViewTime = findViewById(R.id.text_timer_exam);
-        mPresenter = new ExamDetailPresenter(this);
+        mPresenter = new ExamDetailPresenter(this,
+                ExamLessonRepository.getInstance(new ExamLessonLocalDataSource(
+                        new ExamLessonDatabaseHelper(new DBHelper(this)))));
         mImagePlayPause = findViewById(R.id.image_play_pause);
         mCountDownTimer = new CountDownTimer(
                 TIMELINE * TRANFER_MINIUTE_TO_SECOND * TRANFER_SECOND_TO_MILISECOND,
@@ -96,6 +102,7 @@ public class ExamDetailActivity extends ResultTest
     public void showDialogResult(int mark, int rating) {
         super.showDialogResult(mark, rating);
         mTextViewFalse.setText(mLesson.getExams().size() - mark + "");
+        mPresenter.updateLesson(mLesson, mark);
     }
 
     @Override
