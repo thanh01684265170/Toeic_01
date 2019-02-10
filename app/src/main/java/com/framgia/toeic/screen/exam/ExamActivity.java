@@ -45,7 +45,7 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
     protected void initComponent() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(getResources().getString(R.string.action_grammar));
+        getSupportActionBar().setTitle(getResources().getString(R.string.action_exam));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor
                 (R.color.material_cyan_300)));
         mRecyclerView = findViewById(R.id.recycler_exam);

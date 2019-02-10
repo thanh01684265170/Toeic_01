@@ -48,6 +48,8 @@
         <service android:name=".screen.splash.AudioService" />
 
         <activity android:name=".screen.basic_test.BasicTestActivity" />
+        <activity android:name=".screen.user.UserActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

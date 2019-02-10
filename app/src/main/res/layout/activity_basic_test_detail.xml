@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_vocabulary"
     tools:context=".screen.basic_test_detail.BasicTestDetailActivity">
     <TextView
         android:id="@+id/text_background"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_50"
-        android:background="@color/material_blue_accent_400"
+        android:background="@color/material_cyan_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

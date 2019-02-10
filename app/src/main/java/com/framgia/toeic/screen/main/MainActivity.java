@@ -28,6 +28,7 @@ import com.framgia.toeic.screen.base.BaseActivity;
 import com.framgia.toeic.screen.basic_test.BasicTestActivity;
 import com.framgia.toeic.screen.exam.ExamActivity;
 import com.framgia.toeic.screen.grammar.GrammarActivity;
+import com.framgia.toeic.screen.user.UserActivity;
 import com.framgia.toeic.screen.vocabulary.VocabularyActivity;
 
 public class MainActivity extends BaseActivity
@@ -166,6 +167,7 @@ public class MainActivity extends BaseActivity
                 startActivity(ExamActivity.getExamActivity(this));
                 break;
             case R.id.card_user:
+                startActivity(UserActivity.getUserIntent(this));
                 break;
         }
     }
