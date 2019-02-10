@@ -1,5 +1,6 @@
 package com.framgia.toeic.data.source.local;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
     private static final String COLUMN_IMAGE = "image";
     private static final String COLUMN_UNIT_BASIC_TEST = "id_lesson_exam";
     private static final String COLUMN_PART = "part";
+    private static final String COLUMN_MAX_MARK = "max_mark";
     private DBHelper mDBHelper;
 
     public BasicTestDatabaseHelper(DBHelper DBHelper) {
@@ -44,14 +46,14 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
         List<BasicTestLesson> basicTestLessons = new ArrayList<>();
         SQLiteDatabase database = mDBHelper.getReadableDatabase();
         Cursor cursorLesson = database.query(TABLE_LESSON_BASIC_TEST,
-                new String[]{COLUMN_ID_LESSON, COLUMN_NAME},
-                null, null, null, null, null);
+                null,null, null, null, null, null);
         cursorLesson.moveToFirst();
         do {
             BasicTestLesson basicTestLesson;
             basicTestLesson = new BasicTestLesson(
                     cursorLesson.getInt(cursorLesson.getColumnIndex(COLUMN_ID_LESSON)),
-                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)));
+                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)),
+                    cursorLesson.getInt(cursorLesson.getColumnIndex(COLUMN_MAX_MARK)));
             basicTestLessons.add(basicTestLesson);
         } while (cursorLesson.moveToNext());
         callback.onGetDataSuccess(basicTestLessons);
@@ -72,7 +74,6 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
                 null, COLUMN_UNIT_BASIC_TEST + "=?",
                 new String[]{basicTestLesson.getId() + ""},
                 null, null, null, null);
-        Log.d("ducanh123", "getBasicTests: " + basicTestLesson.getId());
         cursorExam.moveToFirst();
         do {
             BasicTest basicTest = new BasicTest.Builder()
@@ -91,5 +92,20 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
         } while (cursorExam.moveToNext());
         callback.onGetDataSuccess(basicTests);
         mDBHelper.close();
+    }
+
+    @Override
+    public void updateBasicTestLesson(BasicTestLesson lesson, int mark, Callback<BasicTestLesson> callback) {
+        try {
+            mDBHelper.openDatabase();
+        } catch (IOException e) {
+            callback.onGetDataFail(e);
+            return;
+        }
+        SQLiteDatabase db = mDBHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MAX_MARK, mark);
+        db.update(TABLE_LESSON_BASIC_TEST, contentValues, COLUMN_ID_LESSON + "=?",
+                new String[]{lesson.getId() + ""});
     }
 }

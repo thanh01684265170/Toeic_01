@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Lesson implements Parcelable {
     private int mId;
     private String mName;
+    private int mRating;
 
     public Lesson() {
     }
@@ -15,9 +16,16 @@ public class Lesson implements Parcelable {
         mName = name;
     }
 
+    public Lesson(int id, String name, int rating) {
+        mId = id;
+        mName = name;
+        mRating = rating;
+    }
+
     protected Lesson(Parcel in) {
         mId = in.readInt();
         mName = in.readString();
+        mRating = in.readInt();
     }
 
     public static final Creator<Lesson> CREATOR = new Creator<Lesson>() {
@@ -48,6 +56,18 @@ public class Lesson implements Parcelable {
         mName = name;
     }
 
+    public int getRating() {
+        return mRating;
+    }
+
+    public void setRating(int rating) {
+        this.mRating = rating;
+    }
+
+    public static Creator<Lesson> getCREATOR() {
+        return CREATOR;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -57,5 +77,6 @@ public class Lesson implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(mId);
         parcel.writeString(mName);
+        parcel.writeInt(mRating);
     }
 }

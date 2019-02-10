@@ -3,14 +3,17 @@ package com.framgia.toeic.screen.basic_test;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.BasicTestLesson;
+import com.framgia.toeic.screen.base.RatingCaculator;
 
 import java.util.List;
 
@@ -26,7 +29,8 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
     @NonNull
     @Override
     public BasicTestViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_basic_test, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_basic_test, viewGroup, false);
         return new BasicTestViewHolder(view, mListener);
     }
 
@@ -44,6 +48,7 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
         private ImageView mImageView;
         private TextView mTextTitle;
         private CardView mCardView;
+        private RatingBar mRatingBar;
         private BasicTestLesson mBasicTestLesson;
         private BasicTestAdapter.OnItemClickListener mListener;
 
@@ -53,6 +58,7 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
             mImageView = itemView.findViewById(R.id.image_basic);
             mTextTitle = itemView.findViewById(R.id.text_name_basic);
             mCardView = itemView.findViewById(R.id.cardview_basic);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
             mCardView.setOnClickListener(this);
         }
 
@@ -62,6 +68,9 @@ public class BasicTestAdapter extends RecyclerView.Adapter<BasicTestAdapter.Basi
             }
             mBasicTestLesson = basicTestLesson;
             mTextTitle.setText(basicTestLesson.getName());
+            RatingCaculator ratingCaculator = new RatingCaculator();
+            mRatingBar.setRating(ratingCaculator.rating(basicTestLesson.getRating(),
+                    mBasicTestLesson.getBasicTests().size()));
         }
 
         @Override

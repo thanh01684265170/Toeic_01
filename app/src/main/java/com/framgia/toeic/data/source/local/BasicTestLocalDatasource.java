@@ -23,4 +23,9 @@ public class BasicTestLocalDatasource implements BasicTestDatasource.Local {
     public void getBasicTests(BasicTestLesson basicTestLesson, Callback<List<BasicTest>> callback) {
         mDBHelper.getBasicTests(basicTestLesson, callback);
     }
+
+    @Override
+    public void updateBasicTestLesson(BasicTestLesson lesson, int mark, Callback<BasicTestLesson> callback) {
+        mDBHelper.updateBasicTestLesson(lesson, mark, callback);
+    }
 }

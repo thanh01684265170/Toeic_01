@@ -3,14 +3,17 @@ package com.framgia.toeic.screen.exam;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.ExamLesson;
+import com.framgia.toeic.screen.base.RatingCaculator;
 
 import java.util.List;
 
@@ -46,6 +49,7 @@ public class ExamLessonAdapter extends RecyclerView.Adapter<ExamLessonAdapter.Vi
         private TextView mTextTitle;
         private CardView mCardView;
         private ExamLesson mExamLesson;
+        private RatingBar mRatingBar;
         private OnItemClickListener mListener;
 
         public Viewholder(View itemView, OnItemClickListener listener) {
@@ -54,6 +58,7 @@ public class ExamLessonAdapter extends RecyclerView.Adapter<ExamLessonAdapter.Vi
             mImageView = itemView.findViewById(R.id.image_exam);
             mTextTitle = itemView.findViewById(R.id.text_name_exam);
             mCardView = itemView.findViewById(R.id.cardview_exam);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
             mCardView.setOnClickListener(this);
         }
 
@@ -63,6 +68,9 @@ public class ExamLessonAdapter extends RecyclerView.Adapter<ExamLessonAdapter.Vi
             }
             mExamLesson = examLesson;
             mTextTitle.setText(examLesson.getName());
+            RatingCaculator ratingCaculator = new RatingCaculator();
+            mRatingBar.setRating(ratingCaculator.rating(examLesson.getRating(),
+                    mExamLesson.getExams().size()));
         }
 
         @Override

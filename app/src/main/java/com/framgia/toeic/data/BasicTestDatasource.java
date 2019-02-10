@@ -10,7 +10,11 @@ public interface BasicTestDatasource {
     interface Local{
         void getBasicTestLessons(Callback<List<BasicTestLesson>> callback);
 
-        void getBasicTests(BasicTestLesson basicTestLesson, Callback<List<BasicTest>> callback);    }
+        void getBasicTests(BasicTestLesson basicTestLesson, Callback<List<BasicTest>> callback);
+
+        void updateBasicTestLesson(BasicTestLesson lesson, int mark, Callback<BasicTestLesson> callback);
+
+    }
 
     interface Remote{
 

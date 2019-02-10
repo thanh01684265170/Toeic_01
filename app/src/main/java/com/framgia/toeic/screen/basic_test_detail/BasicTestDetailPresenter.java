@@ -19,21 +19,6 @@ public class BasicTestDetailPresenter extends RatingCaculator implements BasicTe
         mRepository = repository;
     }
 
-    @Override
-    public void getBasicTest(BasicTestLesson basicTestLesson) {
-        mRepository.getBasicTests(basicTestLesson, new Callback<List<BasicTest>>() {
-            @Override
-            public void onGetDataSuccess(List<BasicTest> basicTests) {
-                mView.showBasicTest(basicTests);
-            }
-
-            @Override
-            public void onGetDataFail(Exception error) {
-
-            }
-        });
-    }
-
     public int calculateMark(List<BasicTest> basicTests) {
         int mark = 0;
         for (BasicTest basicTest : basicTests) {
@@ -70,5 +55,23 @@ public class BasicTestDetailPresenter extends RatingCaculator implements BasicTe
             return;
         }
         mView.listenMedia();
+    }
+
+    @Override
+    public void updateLesson(BasicTestLesson lesson, int mark) {
+        if (mark > lesson.getRating()){
+            mRepository.updateBasicTestLesson(lesson, mark, new Callback<BasicTestLesson>() {
+                @Override
+                public void onGetDataSuccess(BasicTestLesson examLesson) {
+
+                }
+
+                @Override
+                public void onGetDataFail(Exception error) {
+
+                }
+            });
+            lesson.setRating(mark);
+        }
     }
 }

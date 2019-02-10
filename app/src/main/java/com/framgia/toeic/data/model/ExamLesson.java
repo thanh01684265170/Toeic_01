@@ -39,8 +39,8 @@ public class ExamLesson extends Lesson implements Parcelable {
         parcel.writeTypedList(mExams);
     }
 
-    public ExamLesson(int id, String name) {
-        super(id, name);
+    public ExamLesson(int id, String name, int rating) {
+        super(id, name, rating);
     }
 
     public List<Exam> getExams() {

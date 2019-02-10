@@ -1,7 +1,9 @@
 package com.framgia.toeic.data.source.local;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.framgia.toeic.data.ExamLessonDataSource;
 import com.framgia.toeic.data.model.Exam;
@@ -26,6 +28,7 @@ public class ExamLessonDatabaseHelper implements ExamLessonDataSource.Local {
     private static final String COLUMN_ANSWER_D = "answer_d";
     private static final String COLUMN_ID_IMAGE = "id_image";
     private static final String COLUMN_UNIT = "id_lesson";
+    private static final String COLUMN_MAX_MARK = "max_mark";
     private DBHelper mDBHelper;
 
     public ExamLessonDatabaseHelper(DBHelper DBHelper) {
@@ -43,14 +46,14 @@ public class ExamLessonDatabaseHelper implements ExamLessonDataSource.Local {
         List<ExamLesson> examLessons = new ArrayList<>();
         SQLiteDatabase database = mDBHelper.getReadableDatabase();
         Cursor cursorLesson = database.query(TABLE_LESSON_EXAM,
-                new String[]{COLUMN_ID_LESSON, COLUMN_NAME},
-                null, null, null, null, null);
+                null, null, null, null, null, null);
         cursorLesson.moveToFirst();
         do {
             ExamLesson examLesson;
             examLesson = new ExamLesson(cursorLesson.getInt(
                     cursorLesson.getColumnIndex(COLUMN_ID_LESSON)),
-                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)));
+                    cursorLesson.getString(cursorLesson.getColumnIndex(COLUMN_NAME)),
+                    cursorLesson.getInt(cursorLesson.getColumnIndex(COLUMN_MAX_MARK)));
             examLessons.add(examLesson);
         } while (cursorLesson.moveToNext());
         callback.onGetDataSuccess(examLessons);
@@ -92,5 +95,20 @@ public class ExamLessonDatabaseHelper implements ExamLessonDataSource.Local {
         } while (cursorExam.moveToNext());
         callback.onGetDataSuccess(exams);
         mDBHelper.close();
+    }
+
+    @Override
+    public void updateExamLesson(ExamLesson examLesson, int mark, Callback<ExamLesson> callback) {
+        try {
+            mDBHelper.openDatabase();
+        } catch (IOException e) {
+            callback.onGetDataFail(e);
+            return;
+        }
+        SQLiteDatabase db = mDBHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MAX_MARK, mark);
+        db.update(TABLE_LESSON_EXAM, contentValues, COLUMN_ID_LESSON + "=?",
+                new String[]{examLesson.getId() + ""});
     }
 }

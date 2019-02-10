@@ -201,6 +201,13 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return;
             }
         }
+
+        public File loadImage(Context context, Exam exam, String extensionImage){
+            ContextWrapper cw = new ContextWrapper(context);
+            File directory = cw.getDir(FOLDER_IMAGE, Context.MODE_PRIVATE);
+            File mypath = new File(directory, exam.getIdImage() + extensionImage);
+            return mypath;
+        }
     }
 
     public static class ViewHolderType1 extends ViewHolderExam {
@@ -215,10 +222,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bindData(final Exam exam, final Context context, boolean checked, String extensionImage) {
             super.bindData(exam, checked);
-            ContextWrapper cw = new ContextWrapper(context);
-            File directory = cw.getDir(FOLDER_IMAGE, Context.MODE_PRIVATE);
-            File mypath = new File(directory, exam.getIdImage() + extensionImage);
-            Glide.with(context).load(mypath).into(mImageView);
+            Glide.with(context).load(loadImage(context, exam, extensionImage)).into(mImageView);
             mRadioButtonD.setText(exam.getAnwserD());
         }
 
@@ -263,10 +267,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super.bindData(exam, checked);
             mRadioButtonD.setText(exam.getAnwserD());
             mRadioButtonD.setChecked(exam.isCheckAnswerD());
-            ContextWrapper cw = new ContextWrapper(context);
-            File directory = cw.getDir(FOLDER_IMAGE, Context.MODE_PRIVATE);
-            File mypath = new File(directory, exam.getIdImage() + extensionImage);
-            Glide.with(context).load(mypath).into(mImageViewQuestion);
+            Glide.with(context).load(loadImage(context, exam, extensionImage)).into(mImageViewQuestion);
             mRadioButtonD.setText(exam.getAnwserD());
         }
 
