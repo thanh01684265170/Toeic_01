@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +49,13 @@ public class VocabularyDetailActivity extends ResultTest
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Window window = getWindow();
         super.onCreate(savedInstanceState);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.material_accent_700));
+        }
     }
 
     @Override
