@@ -50,4 +50,11 @@
     <string name="title_score">600</string>
     <string name="title_start">Start</string>
     <string name="notification_empty">Chọn ít nhất 1 bài</string>
+    <string name="title_dialog_user">Cập nhật thông tin</string>
+    <string name="title_name">Họ và tên</string>
+    <string name="hint_name">Tên của bạn</string>
+    <string name="title_target">Mục tiêu</string>
+    <string name="hint_target">Mục tiêu của bạn</string>
+    <string name="action_save">Lưu</string>
+    <string name="action_cancel">Hủy</string>
 </resources>
