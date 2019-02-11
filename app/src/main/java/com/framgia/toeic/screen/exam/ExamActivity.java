@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.framgia.toeic.R;
@@ -33,7 +35,13 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Window window = getWindow();
         super.onCreate(savedInstanceState);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.material_accent_700));
+        }
     }
 
     @Override
