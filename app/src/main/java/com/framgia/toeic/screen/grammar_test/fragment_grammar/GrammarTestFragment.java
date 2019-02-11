@@ -95,22 +95,22 @@ public class GrammarTestFragment extends QuestionFragment
 
     @Override
     public void onAnswerARight() {
-        mRadioAnswerA.setBackgroundColor(Color.RED);
+        mRadioAnswerA.setTextColor(getResources().getColor(R.color.material_cyan_300));
     }
 
     @Override
     public void onAnswerBRight() {
-        mRadioAnswerB.setBackgroundColor(Color.RED);
+        mRadioAnswerB.setTextColor(getResources().getColor(R.color.material_cyan_300));
     }
 
     @Override
     public void onAnswerCRight() {
-        mRadioAnswerC.setBackgroundColor(Color.RED);
+        mRadioAnswerC.setTextColor(getResources().getColor(R.color.material_cyan_300));
     }
 
     @Override
     public void onAnswerDRight() {
-        mRadioAnswerD.setBackgroundColor(Color.RED);
+        mRadioAnswerD.setTextColor(getResources().getColor(R.color.material_cyan_300));
     }
 
     @Override

@@ -170,17 +170,17 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mRadioButtonC.setClickable(false);
             checkAnswer(exam);
             if (exam.getResult().equals(exam.getAnwserA())) {
-                mRadioButtonA.setTextColor(Color.BLUE);
+                mRadioButtonA.setTextColor(Color.GREEN);
                 return;
             }
 
             if (exam.getResult().equals(exam.getAnwserB())) {
-                mRadioButtonB.setTextColor(Color.BLUE);
+                mRadioButtonB.setTextColor(Color.GREEN);
                 return;
             }
 
             if (exam.getResult().equals(exam.getAnwserC())) {
-                mRadioButtonC.setTextColor(Color.BLUE);
+                mRadioButtonC.setTextColor(Color.GREEN);
                 return;
             }
         }
@@ -231,7 +231,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super.showAnswer(exam);
             mRadioButtonD.setTextColor(Color.WHITE);
             if (exam.getResult().equals(exam.getAnwserD()) && !exam.isCheckAnswerD()) {
-                mRadioButtonD.setTextColor(Color.BLUE);
+                mRadioButtonD.setTextColor(Color.GREEN);
                 return;
             }
             mRadioButtonD.setClickable(false);
@@ -276,7 +276,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super.showAnswer(exam);
             mRadioButtonD.setTextColor(Color.WHITE);
             if (exam.getResult().equals(exam.getAnwserD()) && !exam.isCheckAnswerD()) {
-                mRadioButtonD.setTextColor(Color.BLUE);
+                mRadioButtonD.setTextColor(Color.GREEN);
                 return;
             }
             mRadioButtonD.setClickable(false);
