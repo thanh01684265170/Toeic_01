@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.framgia.toeic.R;
@@ -34,13 +36,19 @@ import com.framgia.toeic.screen.vocabulary.VocabularyActivity;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener, MainContract.View {
+    private static final String PREFNAME = "data_user";
+    private static final String NAME = "name";
+    private static final String TARGET = "target";
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawer;
     private CardView mCardVocabulary, mCardGrammar, mCardBasicTest, mCardExam, mCardUser;
     private MainContract.Presenter mPresenter;
+    private SharedPreferences mPreferences;
+    private TextView mTextName;
+    private TextView mTextTarget;
 
-    public static Intent getMainIntent(Context context){
+    public static Intent getMainIntent(Context context) {
         return new Intent(context, MainActivity.class);
     }
 
@@ -53,6 +61,12 @@ public class MainActivity extends BaseActivity
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(this.getResources().getColor(R.color.marterial_indigo_500));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restoringPreferences();
     }
 
     @Override
@@ -81,6 +95,9 @@ public class MainActivity extends BaseActivity
                 new MarkLocalDataSource(new MarkDatabaseHelper(new DBHelper(this)))),
                 VocabularyLessonRepository.getInstance(new VocabularyLessonLocalDataSource(
                         new VocabularyLessonDatabaseHelper(new DBHelper(this)))), this);
+        mPreferences = getSharedPreferences(PREFNAME, MODE_PRIVATE);
+        mTextName = findViewById(R.id.text_name);
+        mTextTarget = findViewById(R.id.text_target);
     }
 
     @Override
@@ -175,5 +192,12 @@ public class MainActivity extends BaseActivity
     @Override
     public void showError(Exception error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    public void restoringPreferences() {
+        String name = mPreferences.getString(NAME, "");
+        String target = mPreferences.getString(TARGET, "");
+        mTextName.setText(name);
+        mTextTarget.setText(target);
     }
 }

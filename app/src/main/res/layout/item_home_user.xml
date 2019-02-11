@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/ic_person" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_8"
@@ -32,6 +32,7 @@
         android:text="@string/title_name_user"
         android:textColor="@color/cardview_light_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -42,15 +43,15 @@
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
         android:text="@string/title_target_user"
         android:textColor="@color/cardview_light_background"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/text_target"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
     <View
         android:id="@+id/textView3"
@@ -66,19 +67,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="@dimen/sp_20"
-        android:layout_height="@dimen/sp_20"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_edit" />
-
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
@@ -89,5 +79,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
 </android.support.constraint.ConstraintLayout>
