@@ -22,6 +22,7 @@ import com.framgia.toeic.data.source.local.GrammarLessonLocalDataSource;
 import com.framgia.toeic.screen.base.DisplayAnswerListener;
 import com.framgia.toeic.screen.base.ResultTest;
 import com.framgia.toeic.screen.base.ShowAnswerListener;
+import com.framgia.toeic.screen.grammar.GrammarActivity;
 import com.framgia.toeic.screen.grammar_test.fragment_grammar.GrammarTestFragment;
 
 import java.util.ArrayList;
@@ -148,7 +149,7 @@ public class GrammarTestActivity extends ResultTest implements ShowAnswerListene
                 mDialogResult.dismiss();
                 break;
             case R.id.button_continue:
-                finish();
+                startActivity(GrammarActivity.getGrammarIntent(this));
                 break;
         }
     }

@@ -64,7 +64,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/edit_target"
         app:layout_constraintEnd_toStartOf="@+id/edit_target"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText

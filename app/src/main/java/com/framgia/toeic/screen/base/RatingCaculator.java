@@ -16,11 +16,11 @@ public class RatingCaculator {
             return RatingResult.NORMAL;
         }
 
-        if (numberRating < 0.8) {
+        if (numberRating < 1) {
             return RatingResult.GOOD;
         }
 
-        if (numberRating <= 1) {
+        if (numberRating == 1) {
             return RatingResult.VERY_GOOD;
         }
         return RatingResult.NORMAL;
