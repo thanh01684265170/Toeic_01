@@ -115,17 +115,17 @@ public class VocabularyDetailFragment extends QuestionFragment
 
     @Override
     public void onAnswerARight() {
-        mRadioAnswerA.setTextColor(getResources().getColor(R.color.material_cyan_300));
+        mRadioAnswerA.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override
     public void onAnswerBRight() {
-        mRadioAnswerB.setTextColor(getResources().getColor(R.color.material_cyan_300));
+        mRadioAnswerB.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override
     public void onAnswerCRight() {
-        mRadioAnswerC.setTextColor(getResources().getColor(R.color.material_cyan_300));
+        mRadioAnswerC.setTextColor(getResources().getColor(R.color.material_red_dark_600));
     }
 
     @Override

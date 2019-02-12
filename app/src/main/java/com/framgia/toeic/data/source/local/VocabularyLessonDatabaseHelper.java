@@ -57,23 +57,6 @@ public class VocabularyLessonDatabaseHelper implements VocabularyLessonDataSourc
         mDBHelper.close();
     }
 
-    @Override
-    public void getNumberQuestionVocabulary(Callback<Integer> callback) {
-        try {
-            mDBHelper.openDatabase();
-        } catch (IOException e) {
-            callback.onGetDataFail(e);
-            return;
-        }
-        SQLiteDatabase db = mDBHelper.getReadableDatabase();
-        Cursor cursorNumberQuestion = db.query(TABLE_VOCABULARY,
-                new String[]{COLUMN_COUNT_NUMBER_QUESTION},
-                null, null, null, null, null);
-        cursorNumberQuestion.moveToFirst();
-        int numberQuestion = cursorNumberQuestion.getInt(cursorNumberQuestion.getColumnIndex(COLUMN_COUNT_NUMBER_QUESTION));
-        callback.onGetDataSuccess(numberQuestion);
-        mDBHelper.close();
-    }
 
     public void setVocabularies(final VocabularyLessonItem vocabularyLessonItem) {
         getVocabularies(vocabularyLessonItem, new Callback<List<Vocabulary>>() {

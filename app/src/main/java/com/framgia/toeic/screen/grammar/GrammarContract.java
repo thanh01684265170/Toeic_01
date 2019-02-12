@@ -13,5 +13,6 @@ public interface GrammarContract {
 
     interface Presenter {
         void getGrammarLessons();
+        void updateMark(List<GrammarLesson> lessons);
     }
 }

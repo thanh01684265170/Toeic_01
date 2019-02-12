@@ -35,4 +35,9 @@ public class MarkRepository implements MarkDatasource.Local {
     public void updateMark(int id, int mark) {
         mLocal.updateMark(id, mark);
     }
+
+    @Override
+    public void getMaxMark(Callback<List<Integer>> callback) {
+        mLocal.getMaxMark(callback);
+    }
 }

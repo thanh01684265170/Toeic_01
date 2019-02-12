@@ -2,6 +2,7 @@ package com.framgia.toeic.screen.basic_test_detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -101,6 +102,12 @@ public class BasicTestDetailActivity extends ResultTest
         mTextViewSubmit.setOnClickListener(this);
         mImagePlayPause.setOnClickListener(this);
         playMedia(mLesson.getBasicTests().get(0).getIdImage(), EXTENSION_MEDIA);
+        MediaPlayerInstance.getInstance().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mImagePlayPause.setImageResource(R.drawable.ic_play_button);
+            }
+        });
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -181,6 +188,7 @@ public class BasicTestDetailActivity extends ResultTest
         super.showDialogResult(mark, rating);
         mTextViewFalse.setText(mLesson.getBasicTests().size() - mark + "");
         mPresenter.updateLesson(mLesson, mark);
+        mImagePlayPause.setEnabled(false);
     }
 
     @Override

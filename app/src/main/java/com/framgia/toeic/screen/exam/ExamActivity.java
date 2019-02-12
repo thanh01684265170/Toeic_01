@@ -15,9 +15,12 @@ import android.widget.Toast;
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.ExamLesson;
 import com.framgia.toeic.data.repository.ExamLessonRepository;
+import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.local.DBHelper;
 import com.framgia.toeic.data.source.local.ExamLessonDatabaseHelper;
 import com.framgia.toeic.data.source.local.ExamLessonLocalDataSource;
+import com.framgia.toeic.data.source.local.MarkDatabaseHelper;
+import com.framgia.toeic.data.source.local.MarkLocalDataSource;
 import com.framgia.toeic.screen.base.BaseActivity;
 import com.framgia.toeic.screen.exam_detail.ExamDetailActivity;
 
@@ -78,7 +81,8 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
     @Override
     protected void initData() {
         mPresenter = new ExamPresenter(this, ExamLessonRepository.getInstance(
-                new ExamLessonLocalDataSource(new ExamLessonDatabaseHelper(new DBHelper(this)))));
+                new ExamLessonLocalDataSource(new ExamLessonDatabaseHelper(new DBHelper(this)))),
+                MarkRepository.getInstance(new MarkLocalDataSource(new MarkDatabaseHelper(new DBHelper(this)))));
     }
 
     @Override
@@ -87,6 +91,7 @@ public class ExamActivity extends BaseActivity implements ExamContract.View,
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mLessonAdapter);
+        mPresenter.updateMark(examLessons);
     }
 
     @Override

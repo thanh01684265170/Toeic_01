@@ -13,5 +13,6 @@ public interface ExamContract {
 
     interface Presenter {
         void getExams();
+        void updateMark(List<ExamLesson> lessons);
     }
 }

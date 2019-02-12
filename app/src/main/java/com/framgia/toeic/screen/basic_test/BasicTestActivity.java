@@ -13,9 +13,12 @@ import android.view.WindowManager;
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.BasicTestLesson;
 import com.framgia.toeic.data.repository.BasicTestRepository;
+import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.local.BasicTestDatabaseHelper;
 import com.framgia.toeic.data.source.local.BasicTestLocalDatasource;
 import com.framgia.toeic.data.source.local.DBHelper;
+import com.framgia.toeic.data.source.local.MarkDatabaseHelper;
+import com.framgia.toeic.data.source.local.MarkLocalDataSource;
 import com.framgia.toeic.screen.base.BaseActivity;
 import com.framgia.toeic.screen.basic_test_detail.BasicTestDetailActivity;
 
@@ -57,7 +60,9 @@ public class BasicTestActivity extends BaseActivity
         mPresenter = new BasicTestPresenter(this,
                 BasicTestRepository.getInstance(
                         new BasicTestLocalDatasource(new BasicTestDatabaseHelper(
-                                new DBHelper(this)))));
+                                new DBHelper(this)))), MarkRepository.getInstance(
+                                        new MarkLocalDataSource(new MarkDatabaseHelper(new DBHelper(this)))
+        ));
     }
 
     @Override
@@ -87,6 +92,7 @@ public class BasicTestActivity extends BaseActivity
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(adapter);
+        mPresenter.updateMark(lessons);
     }
 
     @Override

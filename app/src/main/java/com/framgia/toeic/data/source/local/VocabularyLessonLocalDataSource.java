@@ -17,9 +17,4 @@ public class VocabularyLessonLocalDataSource implements VocabularyLessonDataSour
     public void getVocabularyLessons(Callback<List<VocabularyLessonItem>> callback) {
         mDatabaseHelper.getVocabularyLessons(callback);
     }
-
-    @Override
-    public void getNumberQuestionVocabulary(Callback<Integer> callback) {
-        mDatabaseHelper.getNumberQuestionVocabulary(callback);
-    }
 }

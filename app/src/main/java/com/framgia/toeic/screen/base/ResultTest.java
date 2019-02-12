@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.framgia.toeic.screen.base.RatingResult.BAD;
 import static com.framgia.toeic.screen.base.RatingResult.GOOD;
+import static com.framgia.toeic.screen.base.RatingResult.NONE;
 import static com.framgia.toeic.screen.base.RatingResult.NORMAL;
 import static com.framgia.toeic.screen.base.RatingResult.VERY_BAD;
 import static com.framgia.toeic.screen.base.RatingResult.VERY_GOOD;
@@ -89,6 +90,9 @@ public abstract class ResultTest extends BaseActivity implements View.OnClickLis
         mDialogResult.setCanceledOnTouchOutside(false);
         mDialogResult.show();
         switch (rating) {
+            case NONE:
+                textViewRating.setText(getResources().getString(R.string.title_very_bad));
+                break;
             case VERY_BAD:
                 textViewRating.setText(getResources().getString(R.string.title_very_bad));
                 break;
