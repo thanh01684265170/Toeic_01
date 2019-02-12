@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.BasicTest;
@@ -37,6 +38,7 @@ public class PartFragment extends BaseFragment implements DisplayAnswerListener 
     private SeekBar mSeekBar;
     private List<BasicTest> mBasicTests;
     private int mPart;
+    private TextView mTextPart;
     private  BasicTestDetailAdapter mAdapter;
 
     public static Fragment newInstance(List<BasicTest> basicTests, int part){
@@ -61,6 +63,7 @@ public class PartFragment extends BaseFragment implements DisplayAnswerListener 
     @Override
     public void initComponent(View view) {
         mRecyclerView = view.findViewById(R.id.recycler_basic_test);
+        mTextPart = view.findViewById(R.id.text_part);
         mSeekBar = view.findViewById(R.id .seekBar);
     }
 
@@ -68,6 +71,7 @@ public class PartFragment extends BaseFragment implements DisplayAnswerListener 
     public void initData() {
         mBasicTests = getArguments().getParcelableArrayList(ARGUMENT_BASIC_TESTS);
         mPart = getArguments().getInt(ARGUMENT_PART);
+        mTextPart.setText(mPart+"");
     }
 
     @Override
