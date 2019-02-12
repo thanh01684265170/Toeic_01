@@ -22,31 +22,31 @@ public class FragmentAdapter extends PagerAdapter {
         this.mContext = context;
     }
 
-    public int[] images = {
+    public static final int[] images = {
             R.drawable.bg_intro_5,
             R.drawable.bg_intro_6,
             R.drawable.bg_intro_7
     };
 
-    public int[] titles = {
+    public static final int[] titles = {
             R.string.title_intro_1,
             R.string.title_intro_2,
             R.string.title_intro_3
     };
 
-    public int[] descriptions = {
+    public static final int[] descriptions = {
             R.string.des_intro_1,
             R.string.des_intro_2,
             R.string.des_intro_3
     };
 
-    public int[] backgroundcolors = {
+    public static final int[] backgroundcolors = {
             R.color.material_red_400,
             R.color.material_brown_600,
             R.color.material_cyan_500
     };
 
-    public int[] lst_button = {
+    public static final int[] lst_button = {
             R.string.button_intro_1,
             R.string.button_intro_1,
             R.string.button_intro_2
@@ -64,8 +64,7 @@ public class FragmentAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-        mInflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-        View view = mInflater.inflate(R.layout.fragment_intro, container, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_intro, container, false);
         ConstraintLayout layoutIntro = view.findViewById(R.id.layout);
         ImageView imageIntro = view.findViewById(R.id.image_intro);
         TextView titleIntro = view.findViewById(R.id.text_title_intro);
