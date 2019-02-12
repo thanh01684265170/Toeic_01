@@ -10,6 +10,7 @@ public interface MarkDatasource {
         void getMarks(Callback<List<Mark>> callback);
         void getMark(int id, Callback<Mark> callback);
         void updateMark(int id, int mark);
+        void getMaxMark(Callback<List<Integer>> callback);
     }
 
     interface Remote{

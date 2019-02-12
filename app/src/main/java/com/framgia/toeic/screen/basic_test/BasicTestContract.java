@@ -11,5 +11,6 @@ public interface BasicTestContract {
 
     interface Presenter{
         void getBasicTestLessons();
+        void updateMark(List<BasicTestLesson> lessons);
     }
 }

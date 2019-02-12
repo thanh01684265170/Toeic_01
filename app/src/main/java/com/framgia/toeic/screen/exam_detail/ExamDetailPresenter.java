@@ -3,9 +3,11 @@ package com.framgia.toeic.screen.exam_detail;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.framgia.toeic.data.model.BasicTestLesson;
 import com.framgia.toeic.data.model.Exam;
 import com.framgia.toeic.data.model.ExamLesson;
 import com.framgia.toeic.data.repository.ExamLessonRepository;
+import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.Callback;
 import com.framgia.toeic.screen.base.MediaPlayerInstance;
 import com.framgia.toeic.screen.base.RatingCaculator;
@@ -77,4 +79,5 @@ public class ExamDetailPresenter extends RatingCaculator implements ExamDetailCo
             examLesson.setRating(mark);
         }
     }
+
 }

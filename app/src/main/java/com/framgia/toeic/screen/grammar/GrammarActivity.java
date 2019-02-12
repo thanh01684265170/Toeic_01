@@ -14,9 +14,12 @@ import android.widget.Toast;
 import com.framgia.toeic.R;
 import com.framgia.toeic.data.model.GrammarLesson;
 import com.framgia.toeic.data.repository.GrammarLessonRepository;
+import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.local.DBHelper;
 import com.framgia.toeic.data.source.local.GrammarLessonDatabaseHelper;
 import com.framgia.toeic.data.source.local.GrammarLessonLocalDataSource;
+import com.framgia.toeic.data.source.local.MarkDatabaseHelper;
+import com.framgia.toeic.data.source.local.MarkLocalDataSource;
 import com.framgia.toeic.screen.base.BaseActivity;
 import com.framgia.toeic.screen.grammar_detail.GrammarDetailAcvitity;
 
@@ -71,7 +74,8 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
     @Override
     protected void initData() {
         mPresenter = new GrammarPresenter(this, GrammarLessonRepository.getInstance(
-                new GrammarLessonLocalDataSource(new GrammarLessonDatabaseHelper(new DBHelper(this)))));
+                new GrammarLessonLocalDataSource(new GrammarLessonDatabaseHelper(new DBHelper(this)))),
+                MarkRepository.getInstance(new MarkLocalDataSource(new MarkDatabaseHelper(new DBHelper(this)))));
     }
 
     @Override
@@ -86,6 +90,7 @@ public class GrammarActivity extends BaseActivity implements GrammarContract.Vie
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mLessonAdapter);
+        mPresenter.updateMark(grammarLessons);
     }
 
     @Override

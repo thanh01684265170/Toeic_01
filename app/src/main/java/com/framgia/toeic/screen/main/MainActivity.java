@@ -35,7 +35,7 @@ import com.framgia.toeic.screen.vocabulary.VocabularyActivity;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener, MainContract.View {
+        View.OnClickListener {
     private static final String PREFNAME = "data_user";
     private static final String NAME = "name";
     private static final String TARGET = "target";
@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity
     private NavigationView mNavigationView;
     private DrawerLayout mDrawer;
     private CardView mCardVocabulary, mCardGrammar, mCardBasicTest, mCardExam, mCardUser;
-    private MainContract.Presenter mPresenter;
     private SharedPreferences mPreferences;
     private TextView mTextName;
     private TextView mTextTarget;
@@ -93,10 +92,6 @@ public class MainActivity extends BaseActivity
         mCardGrammar = findViewById(R.id.card_grammar);
         mCardExam = findViewById(R.id.card_exam);
         mCardUser = findViewById(R.id.card_user);
-        mPresenter = new MainPresenter(MarkRepository.getInstance(
-                new MarkLocalDataSource(new MarkDatabaseHelper(new DBHelper(this)))),
-                VocabularyLessonRepository.getInstance(new VocabularyLessonLocalDataSource(
-                        new VocabularyLessonDatabaseHelper(new DBHelper(this)))), this);
         mPreferences = getSharedPreferences(PREFNAME, MODE_PRIVATE);
         mTextName = findViewById(R.id.text_name);
         mTextTarget = findViewById(R.id.text_target);
@@ -111,7 +106,6 @@ public class MainActivity extends BaseActivity
         mCardBasicTest.setOnClickListener(this);
         mCardExam.setOnClickListener(this);
         mCardUser.setOnClickListener(this);
-        mPresenter.getNumberQuestion();
     }
 
     @Override
@@ -164,7 +158,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.getMarks();
     }
 
     @Override
@@ -189,11 +182,6 @@ public class MainActivity extends BaseActivity
                 startActivity(UserActivity.getUserIntent(this));
                 break;
         }
-    }
-
-    @Override
-    public void showError(Exception error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     public void restoringPreferences() {

@@ -3,17 +3,21 @@ package com.framgia.toeic.screen.basic_test;
 import com.framgia.toeic.data.model.BasicTest;
 import com.framgia.toeic.data.model.BasicTestLesson;
 import com.framgia.toeic.data.repository.BasicTestRepository;
+import com.framgia.toeic.data.repository.MarkRepository;
 import com.framgia.toeic.data.source.Callback;
 
 import java.util.List;
 
 public class BasicTestPresenter implements BasicTestContract.Presenter {
+    private static final int ID_BASIC_TEST = 3;
     private BasicTestContract.View mView;
     private BasicTestRepository mRepository;
+    private MarkRepository mMarkRepository;
 
-    public BasicTestPresenter(BasicTestContract.View view, BasicTestRepository examLessonRepository) {
+    public BasicTestPresenter(BasicTestContract.View view, BasicTestRepository repository, MarkRepository markRepository) {
         mView = view;
-        mRepository = examLessonRepository;
+        mRepository = repository;
+        mMarkRepository = markRepository;
     }
 
     public void setBasicTest(final BasicTestLesson lesson) {
@@ -46,5 +50,14 @@ public class BasicTestPresenter implements BasicTestContract.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void updateMark(List<BasicTestLesson> lessons) {
+        int totalMark = 0;
+        for (BasicTestLesson lesson: lessons){
+            totalMark += lesson.getRating();
+        }
+        mMarkRepository.updateMark(ID_BASIC_TEST, totalMark);
     }
 }
