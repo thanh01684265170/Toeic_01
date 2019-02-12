@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity
     private static final String PREFNAME = "data_user";
     private static final String NAME = "name";
     private static final String TARGET = "target";
+    private static final String DEFAULT_NAME = "Tên của bạn";
+    private static final String DEFAULT_TARGET = "600";
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawer;
@@ -195,8 +197,8 @@ public class MainActivity extends BaseActivity
     }
 
     public void restoringPreferences() {
-        String name = mPreferences.getString(NAME, "");
-        String target = mPreferences.getString(TARGET, "");
+        String name = mPreferences.getString(NAME, DEFAULT_NAME);
+        String target = mPreferences.getString(TARGET, DEFAULT_TARGET);
         mTextName.setText(name);
         mTextTarget.setText(target);
     }
