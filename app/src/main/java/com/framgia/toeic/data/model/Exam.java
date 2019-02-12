@@ -7,10 +7,10 @@ public class Exam extends Question implements Parcelable {
     protected int mId;
     protected boolean mIsSeclected;
     protected int mIdImage;
-    protected boolean checkAnswerA;
-    protected boolean checkAnswerB;
-    protected boolean checkAnswerC;
-    protected boolean checkAnswerD;
+    protected boolean mCheckAnswerA;
+    protected boolean mCheckAnswerB;
+    protected boolean mCheckAnswerC;
+    protected boolean mCheckAnswerD;
 
     public Exam() {
     }
@@ -20,10 +20,10 @@ public class Exam extends Question implements Parcelable {
         mId = grammarBuilder.mId;
         mIsSeclected = grammarBuilder.mIsSeclected;
         mIdImage = grammarBuilder.mIdImage;
-        checkAnswerA = grammarBuilder.mCheckAnswerA;
-        checkAnswerB = grammarBuilder.mCheckAnswerB;
-        checkAnswerC = grammarBuilder.mCheckAnswerC;
-        checkAnswerD = grammarBuilder.mCheckAnswerD;
+        mCheckAnswerA = grammarBuilder.mCheckAnswerA;
+        mCheckAnswerB = grammarBuilder.mCheckAnswerB;
+        mCheckAnswerC = grammarBuilder.mCheckAnswerC;
+        mCheckAnswerD = grammarBuilder.mCheckAnswerD;
     }
 
     protected Exam(Parcel in) {
@@ -31,10 +31,10 @@ public class Exam extends Question implements Parcelable {
         mId = in.readInt();
         mIsSeclected = in.readByte() != 0;
         mIdImage = in.readInt();
-        checkAnswerA = in.readByte() != 0;
-        checkAnswerB = in.readByte() != 0;
-        checkAnswerC = in.readByte() != 0;
-        checkAnswerD = in.readByte() != 0;
+        mCheckAnswerA = in.readByte() != 0;
+        mCheckAnswerB = in.readByte() != 0;
+        mCheckAnswerC = in.readByte() != 0;
+        mCheckAnswerD = in.readByte() != 0;
     }
 
     public int getId() {
@@ -46,35 +46,35 @@ public class Exam extends Question implements Parcelable {
     }
 
     public boolean isCheckAnswerA() {
-        return checkAnswerA;
+        return mCheckAnswerA;
     }
 
     public void setCheckAnswerA(boolean checkAnswerA) {
-        this.checkAnswerA = checkAnswerA;
+        this.mCheckAnswerA = checkAnswerA;
     }
 
     public boolean isCheckAnswerB() {
-        return checkAnswerB;
+        return mCheckAnswerB;
     }
 
     public void setCheckAnswerB(boolean checkAnswerB) {
-        this.checkAnswerB = checkAnswerB;
+        this.mCheckAnswerB = checkAnswerB;
     }
 
     public boolean isCheckAnswerC() {
-        return checkAnswerC;
+        return mCheckAnswerC;
     }
 
     public void setCheckAnswerC(boolean checkAnswerC) {
-        this.checkAnswerC = checkAnswerC;
+        this.mCheckAnswerC = checkAnswerC;
     }
 
     public boolean isCheckAnswerD() {
-        return checkAnswerD;
+        return mCheckAnswerD;
     }
 
     public void setCheckAnswerD(boolean checkAnswerD) {
-        this.checkAnswerD = checkAnswerD;
+        this.mCheckAnswerD = checkAnswerD;
     }
 
     public static final Creator<Exam> CREATOR = new Creator<Exam>() {
@@ -100,10 +100,10 @@ public class Exam extends Question implements Parcelable {
         parcel.writeInt(mId);
         parcel.writeByte((byte) (mIsSeclected ? 1 : 0));
         parcel.writeInt(mIdImage);
-        parcel.writeByte((byte) (checkAnswerA ? 1 : 0));
-        parcel.writeByte((byte) (checkAnswerB ? 1 : 0));
-        parcel.writeByte((byte) (checkAnswerC ? 1 : 0));
-        parcel.writeByte((byte) (checkAnswerD ? 1 : 0));
+        parcel.writeByte((byte) (mCheckAnswerA ? 1 : 0));
+        parcel.writeByte((byte) (mCheckAnswerB ? 1 : 0));
+        parcel.writeByte((byte) (mCheckAnswerC ? 1 : 0));
+        parcel.writeByte((byte) (mCheckAnswerD ? 1 : 0));
     }
 
     public static class ExamBuilder extends QuestionBuilder {

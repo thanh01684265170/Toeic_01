@@ -1,4 +1,4 @@
-package com.framgia.toeic.screen.basic_test_detail;
+package com.framgia.toeic.screen.basic_test_detail.part_fragment;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -22,11 +22,13 @@ public class BasicTestDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private Context mContext;
     private List<BasicTest> mBasicTests;
     private boolean isChecked;
+    private int mPart;
 
-    public BasicTestDetailAdapter(Context context, List<BasicTest> basicTests, boolean isChecked) {
+    public BasicTestDetailAdapter(Context context, List<BasicTest> basicTests, boolean isChecked, int part) {
         mContext = context;
         mBasicTests = basicTests;
         this.isChecked = isChecked;
+        mPart = part;
     }
 
     public boolean isChecked() {
@@ -39,11 +41,11 @@ public class BasicTestDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemViewType(int position) {
-        if (position < 2){
+        if (mPart == 1){
             return VIEW;
         }
 
-        if (position < 4){
+        if (mPart == 2){
             return VIEW_1;
         }
 

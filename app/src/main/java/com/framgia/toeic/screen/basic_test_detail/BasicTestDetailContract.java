@@ -12,6 +12,10 @@ public interface BasicTestDetailContract {
         void listenMedia();
 
         void pauseMedia();
+
+        void hideSeekBar();
+
+        void changeMedia(int id);
     }
 
     interface Presenter {
@@ -20,6 +24,8 @@ public interface BasicTestDetailContract {
         void checkListening();
 
         void updateLesson(BasicTestLesson lesson, int mark);
+
+        void changeMediaFile(int part, int idLesson);
 
     }
 }

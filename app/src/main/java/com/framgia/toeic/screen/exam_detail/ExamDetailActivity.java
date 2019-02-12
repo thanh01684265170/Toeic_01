@@ -69,6 +69,7 @@ public class ExamDetailActivity extends ResultTest
         mRecyclerView = findViewById(R.id.recycler_exam_detail);
         mTextViewSubmit = findViewById(R.id.text_submit);
         mTextViewTime = findViewById(R.id.text_timer_exam);
+        mSeekBar = findViewById(R.id.seekBar);
         mPresenter = new ExamDetailPresenter(this,
                 ExamLessonRepository.getInstance(new ExamLessonLocalDataSource(
                         new ExamLessonDatabaseHelper(new DBHelper(this)))));
@@ -99,6 +100,29 @@ public class ExamDetailActivity extends ResultTest
         mTextViewSubmit.setOnClickListener(this);
         mImagePlayPause.setOnClickListener(this);
         playMedia(mLesson.getId(), EXTENSION_MEDIA);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSeekBar.setProgress(MediaPlayerInstance.getInstance().getCurrentPosition());
+                mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        MediaPlayerInstance.getInstance().pause();
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        MediaPlayerInstance.getInstance().seekTo(seekBar.getProgress());
+                        MediaPlayerInstance.getInstance().start();
+                    }
+                });
+                mHandler.postDelayed(this, TRANFER_SECOND_TO_MILISECOND);
+            }
+        }, 0);
     }
 
     @Override
@@ -118,6 +142,12 @@ public class ExamDetailActivity extends ResultTest
         super.showDialogResult(mark, rating);
         mTextViewFalse.setText(mLesson.getExams().size() - mark + "");
         mPresenter.updateLesson(mLesson, mark);
+    }
+
+    @Override
+    public void playMedia(int id, String extension) {
+        super.playMedia(id, extension);
+        MediaPlayerInstance.getInstance().start();
     }
 
     @Override
