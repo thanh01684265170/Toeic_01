@@ -29,6 +29,7 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
     private static final String COLUMN_UNIT_BASIC_TEST = "id_lesson_exam";
     private static final String COLUMN_PART = "part";
     private static final String COLUMN_MAX_MARK = "max_mark";
+    private static final String COLUMN_AUDIO = "audio";
     private DBHelper mDBHelper;
 
     public BasicTestDatabaseHelper(DBHelper DBHelper) {
@@ -87,6 +88,7 @@ public class BasicTestDatabaseHelper implements BasicTestDatasource.Local {
                     .setIsSelected(false)
                     .setidImage(cursorExam.getInt(cursorExam.getColumnIndex(COLUMN_IMAGE)))
                     .setPart(cursorExam.getInt(cursorExam.getColumnIndex(COLUMN_PART)))
+                    .setIdAudio(cursorExam.getInt(cursorExam.getColumnIndex(COLUMN_AUDIO)))
                     .build();
             basicTests.add(basicTest);
         } while (cursorExam.moveToNext());

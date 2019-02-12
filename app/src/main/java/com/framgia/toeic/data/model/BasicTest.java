@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class BasicTest extends Exam implements Parcelable {
     protected int mPart;
+    protected int mIdAudio;
 
     public BasicTest(int part) {
         mPart = part;
@@ -13,22 +14,34 @@ public class BasicTest extends Exam implements Parcelable {
     public BasicTest(Builder builder) {
         super(builder);
         mPart = builder.mPart;
+        mIdAudio = builder.mIdAudio;
     }
 
-    public BasicTest(Parcel in, int part) {
+    public BasicTest(Parcel in, int part, int idAudio) {
         super(in);
         mPart = part;
+        mIdAudio = idAudio;
     }
 
     protected BasicTest(Parcel in) {
         super(in);
         mPart = in.readInt();
+        mIdAudio = in.readInt();
+    }
+
+    public int getPart() {
+        return mPart;
+    }
+
+    public void setPart(int part) {
+        mPart = part;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(mPart);
+        dest.writeInt(mIdAudio);
     }
 
     @Override
@@ -51,6 +64,7 @@ public class BasicTest extends Exam implements Parcelable {
 
     public static class Builder extends ExamBuilder {
         private int mPart;
+        private int mIdAudio;
 
         @Override
         public Builder setQuestion(String question) {
@@ -103,6 +117,11 @@ public class BasicTest extends Exam implements Parcelable {
         @Override
         public Builder setIsSelected(boolean isSelected) {
             super.setIsSelected(isSelected);
+            return this;
+        }
+
+        public Builder setIdAudio(int idAudio) {
+            mIdAudio = idAudio;
             return this;
         }
 

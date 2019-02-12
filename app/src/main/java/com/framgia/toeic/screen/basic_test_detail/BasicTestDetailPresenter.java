@@ -74,4 +74,14 @@ public class BasicTestDetailPresenter extends RatingCaculator implements BasicTe
             lesson.setRating(mark);
         }
     }
+
+    @Override
+    public void changeMediaFile(int part, int idLesson) {
+        if (part <= 4){
+            int id = (idLesson - 1)*4 + part;
+            mView.changeMedia(id);
+            return;
+        }
+        mView.hideSeekBar();
+    }
 }

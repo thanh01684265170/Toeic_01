@@ -136,7 +136,6 @@ public abstract class ResultTest extends BaseActivity implements View.OnClickLis
             MediaPlayerInstance.getInstance().reset();
             MediaPlayerInstance.getInstance().setDataSource(mypath.getPath());
             MediaPlayerInstance.getInstance().prepare();
-            MediaPlayerInstance.getInstance().start();
             mSeekBar.setMax(MediaPlayerInstance.getInstance().getDuration());
         } catch (IOException e) {
             e.printStackTrace();
