@@ -7,7 +7,8 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/trasparent"
-    app:cardCornerRadius="@dimen/dp_5">
+    app:cardCornerRadius="@dimen/dp_5"
+    android:layout_margin="@dimen/dp_2">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

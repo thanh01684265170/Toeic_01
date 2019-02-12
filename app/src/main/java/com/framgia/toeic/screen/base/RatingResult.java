@@ -15,4 +15,5 @@ public @interface RatingResult {
     int NORMAL = 3;
     int BAD = 2;
     int VERY_BAD = 1;
+    int NONE = 0;
 }
