@@ -23,7 +23,6 @@ import java.util.List;
 public class SplashActivity extends BaseActivity implements SplashContract.View, OnWriteData,
         FragmentAdapter.onNext, View.OnClickListener {
     private static final int TIME = 3000;
-    private static final String TEXT_BUTTON = "Tiếp";
     private static final int SIZE_DOT = 35;
     private static final int TOTAL_DOT = 3;
     private static final String CODE_DOT = "&#8226";
@@ -153,7 +152,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
 
     @Override
     public void position(String s, int i) {
-        if (!s.equals(TEXT_BUTTON)) {
+        if (!s.equals(getResources().getString(R.string.button_intro_1))) {
             startActivity(MainActivity.getMainIntent(SplashActivity.this));
         }
         mViewPager.setCurrentItem(i + 1, true);
